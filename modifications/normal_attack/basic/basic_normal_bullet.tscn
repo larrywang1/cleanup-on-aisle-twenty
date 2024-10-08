@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://p6lcmec8ngw2"]
+
+[ext_resource type="Script" path="res://modifications/normal_attack/basic/basic_normal_bullet.gd" id="1_6fwch"]
+[ext_resource type="Texture2D" uid="uid://b4is63ngc2lqs" path="res://modifications/normal_attack/basic/basic_normal_bullet.png" id="2_dbchs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hoqsf"]
+radius = 4.0
+
+[node name="BasicNormalBullet" type="Area2D"]
+collision_layer = 4
+collision_mask = 32
+script = ExtResource("1_6fwch")
+bullet_speed = 1000
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_dbchs")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://modifications/normal_attack/basic",
+"o_name": "basic_normal_bullet",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/basicnormalbullet.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "5e5d4f9aeb16393995dd37747c6ebbe9"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hoqsf")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

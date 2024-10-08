@@ -1,0 +1,271 @@
+[gd_scene load_steps=8 format=3 uid="uid://bjb26jny1q6qj"]
+
+[ext_resource type="Texture2D" uid="uid://ftx02hujtaf6" path="res://aisles/sections/section1/section1backgroundcolor.png" id="1_dqft1"]
+[ext_resource type="Texture2D" uid="uid://b8o8lkbebebd5" path="res://aisles/sections/section1/section1light.png" id="2_2frrd"]
+[ext_resource type="Shader" path="res://aisles/sections/moveup.gdshader" id="2_ja4tw"]
+[ext_resource type="Shader" path="res://aisles/sections/movedown.gdshader" id="4_4nn3t"]
+[ext_resource type="Texture2D" uid="uid://bd8ngnwh6bhhm" path="res://aisles/sections/section1/section1outlinedark.png" id="4_6lwf7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ayl6q"]
+shader = ExtResource("2_ja4tw")
+shader_parameter/scroll_speed = 0.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qq0rx"]
+shader = ExtResource("4_4nn3t")
+shader_parameter/scroll_speed = 0.1
+
+[node name="Section1Background" type="CanvasLayer"]
+layer = -1
+follow_viewport_enabled = true
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_dqft1")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/sections/section1",
+"o_name": "section1backgroundcolor",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/section1backgroundcolor.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "486615c1ff19ce0a3f236f2487096d11"
+metadata/_edit_lock_ = true
+
+[node name="Light" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Light"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_ayl6q")
+position = Vector2(-360, 0)
+texture = ExtResource("2_2frrd")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/sections/section1",
+"o_name": "section1light",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/section1outlinelight.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "4576211f70a3545f77f2c7d27972cdc0"
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="Light"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_ayl6q")
+position = Vector2(-200, 0)
+texture = ExtResource("2_2frrd")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/sections/section1",
+"o_name": "section1light",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/section1outlinelight.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "4576211f70a3545f77f2c7d27972cdc0"
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D3" type="Sprite2D" parent="Light"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_ayl6q")
+position = Vector2(-40, 0)
+texture = ExtResource("2_2frrd")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/sections/section1",
+"o_name": "section1light",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/section1outlinelight.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "4576211f70a3545f77f2c7d27972cdc0"
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D4" type="Sprite2D" parent="Light"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_ayl6q")
+position = Vector2(120, 0)
+texture = ExtResource("2_2frrd")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/sections/section1",
+"o_name": "section1light",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/section1outlinelight.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "4576211f70a3545f77f2c7d27972cdc0"
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D5" type="Sprite2D" parent="Light"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_ayl6q")
+position = Vector2(280, 0)
+texture = ExtResource("2_2frrd")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/sections/section1",
+"o_name": "section1light",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/section1outlinelight.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "4576211f70a3545f77f2c7d27972cdc0"
+metadata/_edit_lock_ = true
+
+[node name="Dark" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Dark"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_qq0rx")
+position = Vector2(-280, 0)
+texture = ExtResource("4_6lwf7")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/sections/section1",
+"o_name": "section1outlinedark",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/section1outlinedark.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "05247f9267ba324ae53166da66e845e3"
+
+[node name="Sprite2D2" type="Sprite2D" parent="Dark"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_qq0rx")
+position = Vector2(-120, 0)
+texture = ExtResource("4_6lwf7")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/sections/section1",
+"o_name": "section1outlinedark",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/section1outlinedark.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "05247f9267ba324ae53166da66e845e3"
+
+[node name="Sprite2D3" type="Sprite2D" parent="Dark"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_qq0rx")
+position = Vector2(40, 0)
+texture = ExtResource("4_6lwf7")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/sections/section1",
+"o_name": "section1outlinedark",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/section1outlinedark.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "05247f9267ba324ae53166da66e845e3"
+
+[node name="Sprite2D4" type="Sprite2D" parent="Dark"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_qq0rx")
+position = Vector2(200, 0)
+texture = ExtResource("4_6lwf7")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/sections/section1",
+"o_name": "section1outlinedark",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/section1outlinedark.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "05247f9267ba324ae53166da66e845e3"
+
+[node name="Sprite2D5" type="Sprite2D" parent="Dark"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_qq0rx")
+position = Vector2(360, 0)
+texture = ExtResource("4_6lwf7")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/sections/section1",
+"o_name": "section1outlinedark",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/section1outlinedark.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "05247f9267ba324ae53166da66e845e3"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="item" load_steps=3 format=3 uid="uid://c4vcdkxm8kn24"]
+
+[ext_resource type="Script" path="res://shop/items/base_item.gd" id="1_vqya2"]
+[ext_resource type="Texture2D" uid="uid://cwhbmvsbxhwwb" path="res://shop/items/art/item_placeholder_art.png" id="2_gv7s3"]
+
+[resource]
+script = ExtResource("1_vqya2")
+id = "placeholder"
+texture = ExtResource("2_gv7s3")
+price = 100
+unique = false

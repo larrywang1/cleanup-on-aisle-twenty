@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://bygw2x3ghon5n"]
+
+[ext_resource type="Texture2D" uid="uid://c3y2rp04iua7d" path="res://ui/healthbar/art/healthbarbelow.png" id="1_c4aog"]
+[ext_resource type="Texture2D" uid="uid://cil4nx5tohbjr" path="res://ui/healthbar/art/healthbarabove.png" id="2_butwc"]
+[ext_resource type="Texture2D" uid="uid://b22t6a8h8y1wo" path="res://ui/healthbar/art/healthbarprogress.png" id="3_vjfgu"]
+[ext_resource type="Script" path="res://ui/healthbar/health_bar.gd" id="4_suxn3"]
+[ext_resource type="Texture2D" uid="uid://ot0wf7fcl862" path="res://ui/healthbar/art/damagebarprogress.png" id="5_6br0e"]
+
+[node name="HealthBar" type="TextureProgressBar"]
+offset_right = 40.0
+offset_bottom = 40.0
+value = 50.0
+texture_under = ExtResource("1_c4aog")
+texture_over = ExtResource("2_butwc")
+texture_progress = ExtResource("3_vjfgu")
+texture_progress_offset = Vector2(17, 4)
+script = ExtResource("4_suxn3")
+
+[node name="DamageBar" type="TextureProgressBar" parent="."]
+show_behind_parent = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture_progress = ExtResource("5_6br0e")
+texture_progress_offset = Vector2(17, 4)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

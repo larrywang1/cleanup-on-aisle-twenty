@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwqayisp8slob"]
+
+[ext_resource type="Texture2D" uid="uid://bpixhki3x6eni" path="res://player/art/shopping_cart.png" id="1_fq0xp"]
+[ext_resource type="Script" path="res://player/ghost/ghost.gd" id="2_nvel1"]
+
+[node name="Ghost" type="Sprite2D"]
+modulate = Color(0.67069, 0.67069, 0.67069, 1)
+z_index = -1
+texture = ExtResource("1_fq0xp")
+script = ExtResource("2_nvel1")

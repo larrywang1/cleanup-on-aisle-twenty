@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://0pnyiukfglh2"
+path="res://.godot/imported/sale.aseprite-23687ff234ca051a164cb671cd50788b.res"
+
+[deps]
+
+source_file="res://shop/art/sale.aseprite"
+dest_files=["res://.godot/imported/sale.aseprite-23687ff234ca051a164cb671cd50788b.res"]
+
+[params]
+

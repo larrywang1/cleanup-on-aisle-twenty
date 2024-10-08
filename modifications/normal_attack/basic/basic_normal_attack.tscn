@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://i38332fsfqdx"]
+
+[ext_resource type="Script" path="res://modifications/normal_attack/basic/basic_normal_attack.gd" id="1_aal37"]
+
+[node name="BasicNormalAttack" type="Node2D" node_paths=PackedStringArray("spawn_marker")]
+script = ExtResource("1_aal37")
+damage_scaling = 1.0
+spawn_marker = NodePath("SpawnMarker")
+attack_speed = 0.2
+shake_time = 0.1
+shake_amount = 0.5
+slow = 10
+
+[node name="SpawnMarker" type="Marker2D" parent="."]
+position = Vector2(0, -18)

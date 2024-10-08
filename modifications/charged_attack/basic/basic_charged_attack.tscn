@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://bss6awl7nk7bb"]
+
+[ext_resource type="Script" path="res://modifications/charged_attack/basic/basic_charged_attack.gd" id="1_ivd7u"]
+
+[node name="BasicChargedAttack" type="Node2D" node_paths=PackedStringArray("spawn_marker", "charge_timer")]
+script = ExtResource("1_ivd7u")
+damage_scaling = 5.0
+spawn_marker = NodePath("SpawnMarker")
+charge_timer = NodePath("ChargeTimer")
+shake_time = 0.2
+shake_amount = 2.0
+slow = 20
+
+[node name="SpawnMarker" type="Marker2D" parent="."]
+position = Vector2(0, -18)
+
+[node name="ChargeTimer" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true

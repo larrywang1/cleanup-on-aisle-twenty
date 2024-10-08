@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfsj6cpisvgbu"]
+
+[ext_resource type="Script" path="res://components/scripts/boss_health_component.gd" id="1_tlfu5"]
+
+[node name="BossHealthComponent" type="Node2D"]
+script = ExtResource("1_tlfu5")

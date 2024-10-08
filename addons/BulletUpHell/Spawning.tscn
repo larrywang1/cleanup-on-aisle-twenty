@@ -1,0 +1,170 @@
+[gd_scene load_steps=20 format=3 uid="uid://gixop20d1d75"]
+
+[ext_resource type="Script" path="res://addons/BulletUpHell/BuHSpawner.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bgj0cwnbdx8yw" path="res://addons/BulletUpHell/Bullet/Sprites/Bullet_3.png" id="2_3slxn"]
+[ext_resource type="Script" path="res://addons/BulletUpHell/Bullet/animStates.gd" id="2_ai2re"]
+[ext_resource type="Texture2D" uid="uid://q1fs6hst11fh" path="res://addons/BulletUpHell/Bullet/Sprites/Bullet_06.png" id="3_6fafs"]
+[ext_resource type="Texture2D" uid="uid://c1e3mtw7osxsi" path="res://addons/BulletUpHell/Bullet/Sprites/Bullet_11.png" id="4_gntuv"]
+[ext_resource type="AudioStream" uid="uid://wukwarreyoj7" path="res://addons/BulletUpHell/Bullet/Hit Hurt.wav" id="5_rada6"]
+[ext_resource type="Texture2D" uid="uid://ctf6uegoj53wi" path="res://aisles/bosses/grape/art/grapebosssmallbullet.png" id="6_kftuk"]
+[ext_resource type="Texture2D" uid="uid://b0a7vv06jfa0x" path="res://aisles/bosses/grape/art/grapebosssmallerbullets.png" id="7_447jv"]
+[ext_resource type="Texture2D" uid="uid://cuxhxufnxedpt" path="res://aisles/bosses/grape/art/grapeangrysmallbullets.png" id="7_pkr2m"]
+
+[sub_resource type="Resource" id="Resource_s2qvk"]
+script = ExtResource("2_ai2re")
+ID = ""
+texture = "0"
+collision = "0"
+SFX = ""
+tex_scale = 1.0
+tex_skew = 0.0
+
+[sub_resource type="Resource" id="Resource_8yjii"]
+script = ExtResource("2_ai2re")
+ID = ""
+texture = "0"
+collision = "0"
+SFX = ""
+tex_scale = 1.0
+tex_skew = 0.0
+
+[sub_resource type="Resource" id="Resource_ap43u"]
+script = ExtResource("2_ai2re")
+ID = ""
+texture = "0"
+collision = "0"
+SFX = "0"
+tex_scale = 1.0
+tex_skew = 0.0
+
+[sub_resource type="Resource" id="Resource_6xvhl"]
+script = ExtResource("2_ai2re")
+ID = ""
+texture = "0"
+collision = "0"
+SFX = ""
+tex_scale = 1.0
+tex_skew = 0.0
+
+[sub_resource type="Resource" id="Resource_wl7g7"]
+script = ExtResource("2_ai2re")
+ID = ""
+texture = "0"
+collision = "0"
+SFX = ""
+tex_scale = 1.0
+tex_skew = 0.0
+
+[sub_resource type="SpriteFrames" id="1"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_3slxn")
+}],
+"loop": true,
+"name": &"0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_3slxn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6fafs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_gntuv")
+}],
+"loop": true,
+"name": &"Example",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_kftuk")
+}],
+"loop": true,
+"name": &"grape",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_pkr2m")
+}],
+"loop": true,
+"name": &"grape_angry",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_447jv")
+}],
+"loop": true,
+"name": &"grape_mini",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="2"]
+
+[sub_resource type="ConvexPolygonShape2D" id="3"]
+points = PackedVector2Array(0, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yqbbi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uifcf"]
+radius = 5.0
+
+[node name="BulletHellManager" type="Node2D"]
+script = ExtResource("1")
+custom_bullet_prop_data = {
+"test": Vector3(0, 2, 3)
+}
+default_idle = SubResource("Resource_s2qvk")
+default_spawn = SubResource("Resource_8yjii")
+default_shoot = SubResource("Resource_ap43u")
+default_waiting = SubResource("Resource_6xvhl")
+default_delete = SubResource("Resource_wl7g7")
+cull_technique = 0
+cull_margin = 500.0
+
+[node name="SharedAreas" type="Node2D" parent="."]
+
+[node name="0" type="Area2D" parent="SharedAreas"]
+collision_layer = 16
+collision_mask = 8
+
+[node name="ShapeManager" type="AnimatedSprite2D" parent="."]
+visible = false
+texture_filter = 3
+sprite_frames = SubResource("1")
+animation = &"grape_angry"
+
+[node name="0" type="CollisionShape2D" parent="ShapeManager"]
+shape = SubResource("2")
+
+[node name="LaserBeam" type="CollisionShape2D" parent="ShapeManager"]
+shape = SubResource("3")
+
+[node name="grape" type="CollisionShape2D" parent="ShapeManager"]
+shape = SubResource("CircleShape2D_yqbbi")
+
+[node name="grape_mini" type="CollisionShape2D" parent="ShapeManager"]
+shape = SubResource("CircleShape2D_uifcf")
+
+[node name="SFX" type="Node2D" parent="."]
+
+[node name="0" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("5_rada6")
+
+[node name="Bouncy" type="CharacterBody2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bouncy"]
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+visible = false

@@ -1,0 +1,99 @@
+[gd_scene load_steps=12 format=3 uid="uid://wlb67hsrwkmq"]
+
+[ext_resource type="Script" path="res://main/bullet_boundaries.gd" id="1_1ro57"]
+[ext_resource type="Script" path="res://main/main.gd" id="1_ag7hn"]
+[ext_resource type="Script" path="res://main/aisle_manager.gd" id="1_nr0xc"]
+[ext_resource type="PackedScene" uid="uid://kfmkg11m0106" path="res://player/player.tscn" id="1_slmoa"]
+[ext_resource type="Script" path="res://main/camera.gd" id="2_ds32f"]
+[ext_resource type="Script" path="res://main/shop_manager.gd" id="4_25pmv"]
+[ext_resource type="PackedScene" uid="uid://buqdqws6s83sr" path="res://ui/ui.tscn" id="9_oh6iv"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_twpev"]
+normal = Vector2(1, 0)
+distance = -375.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_nmp4f"]
+normal = Vector2(0, 1)
+distance = -225.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_amyeu"]
+distance = -250.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_i24pk"]
+normal = Vector2(-1, 0)
+distance = -400.0
+
+[node name="Main" type="Node2D" groups=["main"]]
+script = ExtResource("1_ag7hn")
+
+[node name="UI" parent="." instance=ExtResource("9_oh6iv")]
+
+[node name="AisleManager" type="Node2D" parent="." node_paths=PackedStringArray("environment", "entities")]
+script = ExtResource("1_nr0xc")
+environment = NodePath("../Environment")
+entities = NodePath("../Entities")
+
+[node name="ShopManager" type="Node2D" parent="."]
+process_mode = 3
+script = ExtResource("4_25pmv")
+
+[node name="Environment" type="Node2D" parent="."]
+
+[node name="Boundaries" type="Node2D" parent="."]
+
+[node name="BulletBoundaries" type="Area2D" parent="Boundaries"]
+collision_layer = 128
+collision_mask = 4
+script = ExtResource("1_1ro57")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/BulletBoundaries"]
+position = Vector2(-30, 0)
+shape = SubResource("WorldBoundaryShape2D_twpev")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Boundaries/BulletBoundaries"]
+position = Vector2(0, -30)
+shape = SubResource("WorldBoundaryShape2D_nmp4f")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Boundaries/BulletBoundaries"]
+position = Vector2(0, 30)
+shape = SubResource("WorldBoundaryShape2D_amyeu")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Boundaries/BulletBoundaries"]
+position = Vector2(10, 0)
+shape = SubResource("WorldBoundaryShape2D_i24pk")
+
+[node name="PhysicalBoundaries" type="StaticBody2D" parent="Boundaries"]
+collision_layer = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/PhysicalBoundaries"]
+position = Vector2(-25, 0)
+shape = SubResource("WorldBoundaryShape2D_twpev")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Boundaries/PhysicalBoundaries"]
+position = Vector2(0, -25)
+shape = SubResource("WorldBoundaryShape2D_nmp4f")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Boundaries/PhysicalBoundaries"]
+shape = SubResource("WorldBoundaryShape2D_amyeu")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Boundaries/PhysicalBoundaries"]
+shape = SubResource("WorldBoundaryShape2D_i24pk")
+
+[node name="Entities" type="Node2D" parent="."]
+
+[node name="Player" parent="Entities" instance=ExtResource("1_slmoa")]
+position = Vector2(0, 194)
+
+[node name="Projectiles" type="Node2D" parent="." groups=["projectiles"]]
+
+[node name="Camera" type="Camera2D" parent="."]
+limit_left = -450
+limit_top = -275
+limit_right = 450
+limit_bottom = 275
+script = ExtResource("2_ds32f")
+
+[node name="Timer" type="Timer" parent="Camera"]
+
+[connection signal="area_entered" from="Boundaries/BulletBoundaries" to="Boundaries/BulletBoundaries" method="_on_area_entered"]
+[connection signal="timeout" from="Camera/Timer" to="Camera" method="_on_timer_timeout"]

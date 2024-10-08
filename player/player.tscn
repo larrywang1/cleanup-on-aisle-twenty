@@ -1,0 +1,141 @@
+[gd_scene load_steps=13 format=3 uid="uid://kfmkg11m0106"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_uyf5b"]
+[ext_resource type="Script" path="res://player/player_components/items_manager.gd" id="2_5ptxu"]
+[ext_resource type="Script" path="res://player/player_components/dash_component.gd" id="2_uwfer"]
+[ext_resource type="Script" path="res://player/player_components/stamina_component.gd" id="3_uk7yy"]
+[ext_resource type="Script" path="res://player/player_components/player_health_component.gd" id="4_fr0x2"]
+[ext_resource type="Script" path="res://player/player_components/player_hurtbox_component.gd" id="5_1crtt"]
+[ext_resource type="Script" path="res://player/player_components/attack_component.gd" id="6_q0urc"]
+[ext_resource type="PackedScene" uid="uid://dvngsr46b5yoy" path="res://modifications/normal_attack/bananarang/bananarang_normal_attack.tscn" id="7_2rhk3"]
+[ext_resource type="Texture2D" uid="uid://bpixhki3x6eni" path="res://player/art/shopping_cart.png" id="7_urw47"]
+[ext_resource type="PackedScene" uid="uid://bss6awl7nk7bb" path="res://modifications/charged_attack/basic/basic_charged_attack.tscn" id="8_pg0td"]
+[ext_resource type="Shader" path="res://miscellaneous/enemy_flash.gdshader" id="9_amn32"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i5yl4"]
+shader = ExtResource("9_amn32")
+shader_parameter/flash_amount = 0.0
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("dash_component", "stamina_component", "health_component", "hurtbox_component") groups=["player"]]
+z_index = -1
+collision_mask = 130
+motion_mode = 1
+script = ExtResource("1_uyf5b")
+damage = 100.0
+acceleration = 1000
+friction = 1000
+dash_component = NodePath("DashComponent")
+stamina_component = NodePath("StaminaComponent")
+health_component = NodePath("PlayerHealthComponent")
+hurtbox_component = NodePath("PlayerHurtboxComponent")
+
+[node name="ItemsManager" type="Node2D" parent="." groups=["item_manager"]]
+script = ExtResource("2_5ptxu")
+
+[node name="DashComponent" type="Node2D" parent="." node_paths=PackedStringArray("dash_timer", "ghost_timer", "stamina_component", "health_component", "attack_component", "invin_timer")]
+script = ExtResource("2_uwfer")
+dash_timer = NodePath("DashCooldown")
+dash_speed = 600
+ghost_timer = NodePath("GhostCooldown")
+stamina_component = NodePath("../StaminaComponent")
+health_component = NodePath("../PlayerHealthComponent")
+attack_component = NodePath("../AttackComponent")
+invin_timer = NodePath("InvinTimer")
+
+[node name="DashCooldown" type="Timer" parent="DashComponent"]
+wait_time = 0.2
+one_shot = true
+
+[node name="GhostCooldown" type="Timer" parent="DashComponent"]
+wait_time = 0.09
+
+[node name="InvinTimer" type="Timer" parent="DashComponent"]
+wait_time = 0.5
+one_shot = true
+
+[node name="StaminaComponent" type="Node2D" parent="." node_paths=PackedStringArray("stamina_timer")]
+script = ExtResource("3_uk7yy")
+max_stamina = 4
+stamina_timer = NodePath("StaminaRegeneration")
+initial_stamina_cooldown = 2.0
+stamina_cooldown = 0.5
+
+[node name="StaminaRegeneration" type="Timer" parent="StaminaComponent"]
+wait_time = 0.5
+
+[node name="PlayerHealthComponent" type="Node2D" parent="." node_paths=PackedStringArray("invin_timer", "hurtbox", "blink_timer", "sprite") groups=["player_health"]]
+script = ExtResource("4_fr0x2")
+max_health = 4
+invin_timer = NodePath("InvinTimer")
+hurtbox = NodePath("../PlayerHurtboxComponent")
+blink_timer = NodePath("BlinkTimer")
+shake_time = 0.2
+shake_amount = 3.0
+sprite = NodePath("../Sprite2D")
+
+[node name="BlinkTimer" type="Timer" parent="PlayerHealthComponent"]
+wait_time = 0.15
+
+[node name="InvinTimer" type="Timer" parent="PlayerHealthComponent"]
+wait_time = 1.5
+one_shot = true
+
+[node name="PlayerHurtboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component") groups=["player_hurtbox"]]
+collision_layer = 8
+collision_mask = 16
+script = ExtResource("5_1crtt")
+health_component = NodePath("../PlayerHealthComponent")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlayerHurtboxComponent"]
+polygon = PackedVector2Array(-13, 20, -7, -16, 7, -16, 13, 20)
+
+[node name="AttackComponent" type="Node2D" parent="." node_paths=PackedStringArray("normal_attack", "charged_attack", "cooldown_timer") groups=["attack_component"]]
+script = ExtResource("6_q0urc")
+normal_attack = NodePath("NormalAttack")
+charged_attack = NodePath("ChargedAttack")
+cooldown_timer = NodePath("AttackCooldown")
+
+[node name="NormalAttack" type="Node2D" parent="AttackComponent"]
+
+[node name="BananarangNormalAttack" parent="AttackComponent/NormalAttack" instance=ExtResource("7_2rhk3")]
+
+[node name="ChargedAttack" type="Node2D" parent="AttackComponent"]
+
+[node name="BasicChargedAttack" parent="AttackComponent/ChargedAttack" instance=ExtResource("8_pg0td")]
+
+[node name="AttackCooldown" type="Timer" parent="AttackComponent"]
+wait_time = 0.1
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_i5yl4")
+position = Vector2(-1.19209e-07, 1)
+texture = ExtResource("7_urw47")
+metadata/_aseprite_wizard_interface_config_ = {
+"layer_section": false,
+"output_section": true
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://player/art",
+"o_name": "shopping_cart",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/shoppingcart.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "5d9bd6ec5527915f41f05d955c727c82"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-13, 20, -7, -16, 7, -16, 13, 20)
+
+[connection signal="timeout" from="DashComponent/DashCooldown" to="DashComponent" method="_on_dash_cooldown_timeout"]
+[connection signal="timeout" from="DashComponent/GhostCooldown" to="DashComponent" method="spawn_ghost"]
+[connection signal="timeout" from="DashComponent/InvinTimer" to="DashComponent" method="_on_invin_timer_timeout"]
+[connection signal="timeout" from="StaminaComponent/StaminaRegeneration" to="StaminaComponent" method="recover_stamina"]
+[connection signal="timeout" from="PlayerHealthComponent/BlinkTimer" to="PlayerHealthComponent" method="_on_blink_timer_timeout"]
+[connection signal="timeout" from="PlayerHealthComponent/InvinTimer" to="PlayerHealthComponent" method="_on_invin_timer_timeout"]

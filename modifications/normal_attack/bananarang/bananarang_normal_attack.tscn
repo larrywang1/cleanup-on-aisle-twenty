@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvngsr46b5yoy"]
+
+[ext_resource type="Script" path="res://modifications/normal_attack/bananarang/bananarang_normal_attack.gd" id="1_d0eg5"]
+
+[node name="BananarangNormalAttack" type="Node2D" node_paths=PackedStringArray("spawn_marker")]
+script = ExtResource("1_d0eg5")
+damage_scaling = 1.0
+spawn_marker = NodePath("Marker2D")
+attack_speed = 0.2
+shake_time = 0.1
+shake_amount = 1.0
+slow = 10
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0, -18)

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://d165eow85pjqq"]
+
+[ext_resource type="Script" path="res://components/scripts/enemy_hitbox.gd" id="1_18sws"]
+
+[node name="EnemyHitbox" type="Area2D"]
+collision_layer = 16
+collision_mask = 8
+script = ExtResource("1_18sws")
+force = 200.0

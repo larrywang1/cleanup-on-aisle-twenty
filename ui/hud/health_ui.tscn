@@ -1,0 +1,67 @@
+[gd_scene load_steps=4 format=3 uid="uid://77ltryohpb26"]
+
+[ext_resource type="Script" path="res://ui/hud/health_ui.gd" id="1_0bf3x"]
+[ext_resource type="Texture2D" uid="uid://c6d6x6le0vik2" path="res://ui/art/healthempty.png" id="1_obxd1"]
+[ext_resource type="Texture2D" uid="uid://dfnpkrgdfn7o6" path="res://ui/art/healthinner.png" id="1_yvy38"]
+
+[node name="HealthUI" type="Control"]
+custom_minimum_size = Vector2(28, 34)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -605.0
+offset_bottom = -318.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0bf3x")
+
+[node name="Inner" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_yvy38")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://ui/art",
+"o_name": "healthinner",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/healthui.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "3af440836c9b561de344dd61df916d6c"
+
+[node name="Outer" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_obxd1")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://ui/art",
+"o_name": "healthempty",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/healthui.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"layer_section": false,
+"output_section": true,
+"slice_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "090997cba75972fadf30fd5c91968fbd"

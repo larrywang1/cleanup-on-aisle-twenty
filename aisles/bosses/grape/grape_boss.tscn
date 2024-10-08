@@ -1,0 +1,1115 @@
+[gd_scene load_steps=58 format=3 uid="uid://bkvvyilkp1mq8"]
+
+[ext_resource type="Texture2D" uid="uid://kphsrj5m53l7" path="res://aisles/bosses/grape/art/grape_boss.png" id="1_auvfe"]
+[ext_resource type="Shader" path="res://miscellaneous/enemy_flash.gdshader" id="1_crokl"]
+[ext_resource type="Script" path="res://aisles/bosses/grape/grape_boss.gd" id="1_kdn68"]
+[ext_resource type="PackedScene" uid="uid://dfsj6cpisvgbu" path="res://components/scenes/boss_health_component.tscn" id="2_pypw4"]
+[ext_resource type="PackedScene" uid="uid://bvr04i1rtrr5n" path="res://components/scenes/enemy_hurtbox.tscn" id="3_4fv75"]
+[ext_resource type="PackedScene" uid="uid://d165eow85pjqq" path="res://components/scenes/enemy_hitbox.tscn" id="6_kh7p1"]
+[ext_resource type="Script" path="res://aisles/bosses/grape/grape_attack_pattern_1.gd" id="7_3aorh"]
+[ext_resource type="Script" path="res://addons/BulletUpHell/Nodes/BuHSpawnPoint.gd" id="8_g7nq5"]
+[ext_resource type="Script" path="res://aisles/bosses/grape/grape_attack_pattern_2.gd" id="8_poang"]
+[ext_resource type="Script" path="res://addons/BulletUpHell/Nodes/BuHPattern.gd" id="9_2qf8i"]
+[ext_resource type="Script" path="res://addons/BulletUpHell/SpawnPatterns/PatternCircle.gd" id="10_clu7d"]
+[ext_resource type="Script" path="res://addons/BulletUpHell/SpawnPatterns/PatternRandomizer.gd" id="11_3kf2s"]
+[ext_resource type="Script" path="res://addons/BulletUpHell/Nodes/BuHBulletProperties.gd" id="11_ajtqr"]
+[ext_resource type="Script" path="res://addons/BulletUpHell/SpawnPatterns/PatternOne.gd" id="11_k0i4b"]
+[ext_resource type="Script" path="res://addons/BulletUpHell/Bullet/animStates.gd" id="12_4u7m0"]
+[ext_resource type="Script" path="res://addons/BulletUpHell/Bullet/BulletProps.gd" id="13_d1xoi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i5yl4"]
+shader = ExtResource("1_crokl")
+shader_parameter/flash_amount = 0.0
+
+[sub_resource type="Animation" id="Animation_4evp7"]
+length = 2.0
+loop_mode = 1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.33333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"spawn_full_one"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.5, 0.75, 1, 1.25, 1.375, 1.5, 1.625, 1.75, 1.875),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
+}
+
+[sub_resource type="Animation" id="Animation_g4ppd"]
+resource_name = "angry"
+length = 1.75
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1, 1.125, 1.25, 1.375, 1.5, 1.625),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackPattern2")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.366667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"spawn_attack_1"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_phq0h"]
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 14, 15, 16]
+}
+
+[sub_resource type="Animation" id="Animation_v0wvk"]
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [17, 18]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s4dkk"]
+_data = {
+"active": SubResource("Animation_4evp7"),
+"angry": SubResource("Animation_g4ppd"),
+"angry2": SubResource("Animation_phq0h"),
+"inactive": SubResource("Animation_v0wvk")
+}
+
+[sub_resource type="Curve2D" id="Curve2D_njoth"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_gu5bx"]
+resource_name = "PatternCircle"
+script = ExtResource("10_clu7d")
+radius = 0.0
+angle_total = 6.28319
+angle_decal = 0.0
+center = 0
+symmetric = false
+bullet = "grapefull1"
+nbr = 16
+iterations = 1
+cooldown_spawn = 0.0
+cooldown_shoot = 0.0
+cooldown_next_spawn = 0.0
+cooldown_next_shoot = 0.0
+cooldown_layers = PackedVector2Array()
+cooldown_stasis = false
+on_interruption = 0
+pattern_angle = 0.0
+pattern_angle_target = NodePath("")
+pattern_angle_mouse = false
+wait_behavior = 0
+wait_tween_momentum = 0
+wait_tween_length = 0.0
+wait_tween_time = 0.0
+forced_angle = 0.0
+forced_target = NodePath("")
+forced_lookat_mouse = false
+forced_pattern_lookat = true
+impulse = 0
+bullet_list = Array[String]([])
+skip_step = 0
+skip_list = Array[PackedInt32Array]([])
+skip_in_list = true
+
+[sub_resource type="Curve2D" id="Curve2D_qabxy"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_4m7sn"]
+resource_name = "PatternCircle"
+script = ExtResource("10_clu7d")
+radius = 0.0
+angle_total = 6.28319
+angle_decal = 0.0
+center = 0
+symmetric = false
+bullet = "grapefull1"
+nbr = 8
+iterations = 40
+cooldown_spawn = 0.2
+cooldown_shoot = 0.0
+cooldown_next_spawn = 0.0
+cooldown_next_shoot = 0.0
+cooldown_layers = PackedVector2Array()
+cooldown_stasis = false
+on_interruption = 0
+pattern_angle = 0.0
+pattern_angle_target = NodePath("")
+pattern_angle_mouse = false
+wait_behavior = 0
+wait_tween_momentum = 0
+wait_tween_length = 0.0
+wait_tween_time = 0.0
+forced_angle = 0.0
+forced_target = NodePath("")
+forced_lookat_mouse = false
+forced_pattern_lookat = true
+impulse = 0
+bullet_list = Array[String]([])
+skip_step = 0
+skip_list = Array[PackedInt32Array]([])
+skip_in_list = true
+
+[sub_resource type="Curve2D" id="Curve2D_jxjai"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ionw8"]
+resource_name = "PatternOne"
+script = ExtResource("11_k0i4b")
+bullet = "grapefull2"
+nbr = 1
+iterations = 130
+cooldown_spawn = 0.06
+cooldown_shoot = 0.0
+cooldown_next_spawn = 0.0
+cooldown_next_shoot = 0.0
+cooldown_layers = PackedVector2Array()
+cooldown_stasis = false
+on_interruption = 0
+pattern_angle = 0.0
+pattern_angle_target = NodePath("")
+pattern_angle_mouse = false
+wait_behavior = 0
+wait_tween_momentum = 0
+wait_tween_length = 0.0
+wait_tween_time = 0.0
+forced_angle = 0.0
+forced_target = NodePath("")
+forced_lookat_mouse = false
+forced_pattern_lookat = true
+impulse = 0
+bullet_list = Array[String]([])
+skip_step = 0
+skip_list = Array[PackedInt32Array]([])
+skip_in_list = true
+
+[sub_resource type="Curve2D" id="Curve2D_wa2qu"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_7de51"]
+resource_name = "PatternOne"
+script = ExtResource("11_k0i4b")
+bullet = "grapefull3"
+nbr = 1
+iterations = 130
+cooldown_spawn = 0.06
+cooldown_shoot = 0.0
+cooldown_next_spawn = 0.0
+cooldown_next_shoot = 0.0
+cooldown_layers = PackedVector2Array()
+cooldown_stasis = false
+on_interruption = 0
+pattern_angle = 0.0
+pattern_angle_target = NodePath("")
+pattern_angle_mouse = false
+wait_behavior = 0
+wait_tween_momentum = 0
+wait_tween_length = 0.0
+wait_tween_time = 0.0
+forced_angle = 0.0
+forced_target = NodePath("")
+forced_lookat_mouse = false
+forced_pattern_lookat = true
+impulse = 0
+bullet_list = Array[String]([])
+skip_step = 0
+skip_list = Array[PackedInt32Array]([])
+skip_in_list = true
+
+[sub_resource type="Curve2D" id="Curve2D_krped"]
+
+[sub_resource type="Resource" id="Resource_uomlh"]
+script = ExtResource("11_3kf2s")
+randomisation_chances = 1.0
+bullet_choice = PackedStringArray()
+nbr_choice = PackedInt32Array(16, 18, 20)
+nbr_variation = Vector3(0, 0, 0)
+nbr_reroll = false
+iterations_choice = PackedInt32Array()
+iterations_variation = Vector3(0, 0, 0)
+forced_angle_choice = PackedFloat32Array()
+forced_angle_variation = Vector3(0, 0, 0)
+forced_angle_reroll = false
+forced_target_choice = []
+symmetry_chances = 0.0
+center_choice = PackedInt32Array()
+stasis_chances = 0.0
+cooldown_spawn_choice = PackedFloat32Array()
+cooldown_spawn_variation = Vector3(0, 0, 0)
+cooldown_spawn_reroll = false
+cooldown_shoot_choice = PackedFloat32Array()
+cooldown_shoot_variation = Vector3(0, 0, 0)
+cooldown_shoot_reroll = false
+cooldown_next_spawn_choice = PackedFloat32Array()
+cooldown_next_spawn_variation = Vector3(0, 0, 0)
+cooldown_next_spawn_reroll = false
+cooldown_next_shoot_choice = PackedFloat32Array()
+cooldown_next_shoot_variation = Vector3(0, 0, 0)
+cooldown_next_shoot_reroll = false
+offset_x_variation = Vector3(0, 0, 0)
+offset_y_variation = Vector3(0, 0, 0)
+offset_x_reroll = false
+offset_y_reroll = false
+radius_choice = PackedFloat32Array()
+radius_variation = Vector3(0, 0, 0)
+radius_reroll = false
+angle_total_choice = PackedFloat32Array()
+angle_total_variation = Vector3(0, 0, 0)
+angle_total_reroll = false
+angle_decal_choice = PackedFloat32Array()
+angle_decal_variation = Vector3(0, 0, 0)
+angle_decal_reroll = false
+reversed_chances = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_rxe3u"]
+resource_name = "PatternCircle"
+script = ExtResource("10_clu7d")
+radius = 0.0
+angle_total = 6.28319
+angle_decal = 0.0
+center = 0
+symmetric = false
+bullet = "grapehalf1"
+nbr = 1
+iterations = 3
+cooldown_spawn = 0.2
+cooldown_shoot = 0.0
+cooldown_next_spawn = 0.0
+cooldown_next_shoot = 0.0
+cooldown_layers = PackedVector2Array()
+cooldown_stasis = false
+on_interruption = 0
+pattern_angle = 0.0
+pattern_angle_target = NodePath("")
+pattern_angle_mouse = false
+wait_behavior = 0
+wait_tween_momentum = 0
+wait_tween_length = 0.0
+wait_tween_time = 0.0
+forced_angle = 0.0
+forced_target = NodePath("")
+forced_lookat_mouse = false
+forced_pattern_lookat = true
+impulse = 0
+bullet_list = Array[String]([])
+skip_step = 0
+skip_list = Array[PackedInt32Array]([])
+skip_in_list = true
+random = SubResource("Resource_uomlh")
+
+[sub_resource type="Curve2D" id="Curve2D_ur1c8"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_fkrpr"]
+resource_name = "PatternCircle"
+script = ExtResource("10_clu7d")
+radius = 0.0
+angle_total = 6.28319
+angle_decal = 0.0
+center = 0
+symmetric = false
+bullet = "grapehalf1"
+nbr = 8
+iterations = 50
+cooldown_spawn = 0.2
+cooldown_shoot = 0.0
+cooldown_next_spawn = 0.0
+cooldown_next_shoot = 0.0
+cooldown_layers = PackedVector2Array()
+cooldown_stasis = false
+on_interruption = 0
+pattern_angle = 0.0
+pattern_angle_target = NodePath("")
+pattern_angle_mouse = false
+wait_behavior = 0
+wait_tween_momentum = 0
+wait_tween_length = 0.0
+wait_tween_time = 0.0
+forced_angle = 0.0
+forced_target = NodePath("")
+forced_lookat_mouse = false
+forced_pattern_lookat = true
+impulse = 0
+bullet_list = Array[String]([])
+skip_step = 0
+skip_list = Array[PackedInt32Array]([])
+skip_in_list = true
+
+[sub_resource type="Curve2D" id="Curve2D_3xgtb"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_a37h7"]
+resource_name = "PatternCircle"
+script = ExtResource("10_clu7d")
+radius = 0.0
+angle_total = 6.28319
+angle_decal = 0.0
+center = 0
+symmetric = false
+bullet = "grapehalf1"
+nbr = 32
+iterations = 13
+cooldown_spawn = 0.76
+cooldown_shoot = 0.0
+cooldown_next_spawn = 0.0
+cooldown_next_shoot = 0.0
+cooldown_layers = PackedVector2Array()
+cooldown_stasis = false
+on_interruption = 0
+pattern_angle = 0.0
+pattern_angle_target = NodePath("")
+pattern_angle_mouse = false
+wait_behavior = 0
+wait_tween_momentum = 0
+wait_tween_length = 0.0
+wait_tween_time = 0.0
+forced_angle = 0.0
+forced_target = NodePath("")
+forced_lookat_mouse = false
+forced_pattern_lookat = true
+impulse = 0
+bullet_list = Array[String]([])
+skip_step = 0
+skip_list = Array[PackedInt32Array]([])
+skip_in_list = true
+
+[sub_resource type="Curve2D" id="Curve2D_6gm15"]
+
+[sub_resource type="Curve" id="Curve_rcldh"]
+
+[sub_resource type="Resource" id="Resource_1o3l3"]
+script = ExtResource("12_4u7m0")
+ID = "grape"
+texture = "grape"
+collision = "grape"
+SFX = ""
+tex_scale = 1.0
+tex_skew = 0.0
+
+[sub_resource type="Curve" id="Curve_fedim"]
+
+[sub_resource type="PackedDataContainer" id="PackedDataContainer_jh28t"]
+script = ExtResource("13_d1xoi")
+damage = 1.0
+speed = 120.0
+scale = 1.0
+angle = 0.0
+groups = PackedStringArray()
+custom_data = {}
+death_after_time = 4.0
+death_outside_box = Rect2(0, 0, 0, 0)
+death_from_collision = true
+death_speed_under = 0.0
+death_culling_overwrite = 0
+spec_modulate_loop = 0.0
+anim_idle = SubResource("Resource_1o3l3")
+anim_spawn = SubResource("Resource_1o3l3")
+anim_shoot = SubResource("Resource_1o3l3")
+anim_waiting = SubResource("Resource_1o3l3")
+anim_delete = SubResource("Resource_1o3l3")
+anim_more = Array[ExtResource("12_4u7m0")]([])
+spec_trail_length = 0.0
+spec_trail_width = 0.0
+spec_trail_modulate = Color(0, 0, 0, 1)
+a_direction_equation = ""
+a_angular_equation = ""
+a_curve_movement = 0
+a_speed_multi_iterations = 0
+a_speed_multi_scale = 0.0
+a_speed_multiplier = SubResource("Curve_rcldh")
+spec_bounces = 0
+spec_no_collision = false
+spec_rotating_speed = 0.0
+spec_only_spin_sprite = false
+spec_weight = 0.0
+scale_multi_iterations = 0
+scale_multiplier = SubResource("Curve_fedim")
+scale_multi_scale = 0.0
+trigger_container = ""
+trigger_wait_for_shot = false
+homing_type = 0
+homing_target = NodePath("")
+homing_steer = 0.0
+homing_time_start = 0.0
+homing_duration = 0.0
+homing_detection_dist = 0.0
+homing_start_signal = ""
+homing_range = Vector2(0, 0)
+homing_imprecision = Vector2(0, 0)
+r_randomisation_chances = 0.0
+r_speed_choice = PackedFloat32Array()
+r_speed_variation = Vector3(0, 0, 0)
+r_scale_choice = PackedFloat32Array()
+r_scale_variation = Vector3(0, 0, 0)
+r_angle_choice = PackedFloat32Array()
+r_angle_variation = Vector3(0, 0, 0)
+r_group_choice = []
+r_bounce_choice = PackedInt32Array()
+r_bounce_variation = Vector3(0, 0, 0)
+r_no_coll_chances = 0.0
+r_modulate_variation = Vector3(0, 0, 0)
+r_trail_length_variation = Vector3(0, 0, 0)
+r_trail_color_variation = Vector3(0, 0, 0)
+r_rotating_variation = Vector3(0, 0, 0)
+r_death_after_choice = PackedFloat32Array()
+r_death_after_variation = Vector3(0, 0, 0)
+r_death_outside_chances = 0.0
+r_dir_equation_choice = PackedStringArray()
+r_curve_choice = []
+r_speed_multi_curve_choice = []
+r_speed_multi_iter_variation = Vector3(0, 0, 0)
+r_speed_multi_scale_variation = Vector3(0, 0, 0)
+r_trigger_choice = PackedStringArray()
+r_wait_for_shot_chances = 0.0
+r_homing_target_choice = []
+r_special_target_choice = PackedStringArray()
+r_group_target_choice = PackedStringArray()
+r_pos_target_choice = PackedVector2Array()
+r_steer_choice = PackedFloat32Array()
+r_steer_variation = Vector3(0, 0, 0)
+r_homing_delay_choice = PackedFloat32Array()
+r_homing_delay_variation = Vector3(0, 0, 0)
+r_homing_dur_choice = PackedFloat32Array()
+r_homing_dur_variation = Vector3(0, 0, 0)
+r_scale_multi_curve_choice = []
+r_scale_multi_iter_variation = Vector3(0, 0, 0)
+r_scale_multi_scale_variation = Vector3(0, 0, 0)
+
+[sub_resource type="Curve2D" id="Curve2D_8cd36"]
+
+[sub_resource type="Curve" id="Curve_c5ctr"]
+
+[sub_resource type="Resource" id="Resource_p2pkw"]
+script = ExtResource("12_4u7m0")
+ID = "grape"
+texture = "grape"
+collision = "grape"
+SFX = ""
+tex_scale = 1.0
+tex_skew = 0.0
+
+[sub_resource type="Curve" id="Curve_jule4"]
+
+[sub_resource type="PackedDataContainer" id="PackedDataContainer_qua10"]
+script = ExtResource("13_d1xoi")
+damage = 1.0
+speed = 125.0
+scale = 1.0
+angle = 0.0
+groups = PackedStringArray()
+custom_data = {
+"test": Vector3(0, 2, 3)
+}
+death_after_time = 4.0
+death_outside_box = Rect2(0, 0, 0, 0)
+death_from_collision = true
+death_speed_under = 0.0
+death_culling_overwrite = 3
+spec_modulate_loop = 0.0
+anim_idle = SubResource("Resource_p2pkw")
+anim_spawn = SubResource("Resource_p2pkw")
+anim_shoot = SubResource("Resource_p2pkw")
+anim_waiting = SubResource("Resource_p2pkw")
+anim_delete = SubResource("Resource_p2pkw")
+anim_more = Array[ExtResource("12_4u7m0")]([])
+spec_trail_length = 0.0
+spec_trail_width = 0.0
+spec_trail_modulate = Color(1, 1, 1, 1)
+a_direction_equation = ""
+a_angular_equation = ""
+a_curve_movement = 0
+a_speed_multi_iterations = 0
+a_speed_multi_scale = 0.0
+a_speed_multiplier = SubResource("Curve_c5ctr")
+spec_bounces = 0
+spec_no_collision = false
+spec_rotating_speed = 0.0
+spec_only_spin_sprite = true
+spec_weight = 1.0
+scale_multi_iterations = 0
+scale_multiplier = SubResource("Curve_jule4")
+scale_multi_scale = 1.0
+trigger_container = ""
+trigger_wait_for_shot = true
+homing_type = 0
+homing_target = NodePath("")
+homing_steer = 0.0
+homing_time_start = 0.0
+homing_duration = 999.0
+homing_detection_dist = 0.0
+homing_start_signal = ""
+homing_range = Vector2(9999, 20)
+homing_imprecision = Vector2(0, 0)
+r_randomisation_chances = 1.0
+r_speed_choice = PackedFloat32Array()
+r_speed_variation = Vector3(0, 0, 0)
+r_scale_choice = PackedFloat32Array()
+r_scale_variation = Vector3(0, 0, 0)
+r_angle_choice = PackedFloat32Array(0, -0.05, 0.03, -0.03, 0.05, 0.1, -0.1, 0.15, -0.15)
+r_angle_variation = Vector3(0, 0, 0)
+r_group_choice = []
+r_bounce_choice = PackedInt32Array()
+r_bounce_variation = Vector3(0, 0, 0)
+r_no_coll_chances = 0.0
+r_modulate_variation = Vector3(0, 0, 0)
+r_trail_length_variation = Vector3(0, 0, 0)
+r_trail_color_variation = Vector3(0, 0, 0)
+r_rotating_variation = Vector3(0, 0, 0)
+r_death_after_choice = PackedFloat32Array()
+r_death_after_variation = Vector3(0, 0, 0)
+r_death_outside_chances = 0.0
+r_dir_equation_choice = PackedStringArray()
+r_curve_choice = []
+r_speed_multi_curve_choice = []
+r_speed_multi_iter_variation = Vector3(0, 0, 0)
+r_speed_multi_scale_variation = Vector3(0, 0, 0)
+r_trigger_choice = PackedStringArray()
+r_wait_for_shot_chances = 0.0
+r_homing_target_choice = []
+r_special_target_choice = PackedStringArray()
+r_group_target_choice = PackedStringArray()
+r_pos_target_choice = PackedVector2Array()
+r_steer_choice = PackedFloat32Array()
+r_steer_variation = Vector3(0, 0, 0)
+r_homing_delay_choice = PackedFloat32Array()
+r_homing_delay_variation = Vector3(0, 0, 0)
+r_homing_dur_choice = PackedFloat32Array()
+r_homing_dur_variation = Vector3(0, 0, 0)
+r_scale_multi_curve_choice = []
+r_scale_multi_iter_variation = Vector3(0, 0, 0)
+r_scale_multi_scale_variation = Vector3(0, 0, 0)
+
+[sub_resource type="Curve2D" id="Curve2D_d268m"]
+
+[sub_resource type="Curve" id="Curve_wj1gd"]
+
+[sub_resource type="Resource" id="Resource_yroa3"]
+script = ExtResource("12_4u7m0")
+ID = "grapemini"
+texture = "grape_mini"
+collision = "grape_mini"
+SFX = ""
+tex_scale = 1.0
+tex_skew = 0.0
+
+[sub_resource type="Curve" id="Curve_jjlkr"]
+
+[sub_resource type="PackedDataContainer" id="PackedDataContainer_csux2"]
+script = ExtResource("13_d1xoi")
+damage = 1.0
+speed = 140.0
+scale = 1.0
+angle = 0.0
+groups = PackedStringArray()
+custom_data = {
+"test": Vector3(0, 2, 3)
+}
+death_after_time = 4.0
+death_outside_box = Rect2(0, 0, 0, 0)
+death_from_collision = true
+death_speed_under = 0.0
+death_culling_overwrite = 3
+spec_modulate_loop = 0.0
+anim_idle = SubResource("Resource_yroa3")
+anim_spawn = SubResource("Resource_yroa3")
+anim_shoot = SubResource("Resource_yroa3")
+anim_waiting = SubResource("Resource_yroa3")
+anim_delete = SubResource("Resource_yroa3")
+anim_more = Array[ExtResource("12_4u7m0")]([])
+spec_trail_length = 0.0
+spec_trail_width = 0.0
+spec_trail_modulate = Color(1, 1, 1, 1)
+a_direction_equation = ""
+a_angular_equation = ""
+a_curve_movement = 0
+a_speed_multi_iterations = 0
+a_speed_multi_scale = 0.0
+a_speed_multiplier = SubResource("Curve_wj1gd")
+spec_bounces = 0
+spec_no_collision = false
+spec_rotating_speed = 0.0
+spec_only_spin_sprite = true
+spec_weight = 1.0
+scale_multi_iterations = 0
+scale_multiplier = SubResource("Curve_jjlkr")
+scale_multi_scale = 1.0
+trigger_container = ""
+trigger_wait_for_shot = true
+homing_type = 0
+homing_target = NodePath("")
+homing_steer = 0.0
+homing_time_start = 0.0
+homing_duration = 999.0
+homing_detection_dist = 0.0
+homing_start_signal = ""
+homing_range = Vector2(9999, 20)
+homing_imprecision = Vector2(0, 0)
+r_randomisation_chances = 1.0
+r_speed_choice = PackedFloat32Array()
+r_speed_variation = Vector3(0, 0, 0)
+r_scale_choice = PackedFloat32Array()
+r_scale_variation = Vector3(0, 0, 0)
+r_angle_choice = PackedFloat32Array(0, -0.07, 0.07, 0.15, -0.15, 0.2, -0.2, 0.25, -0.25, 0.3, -0.3, 0.35, -0.35)
+r_angle_variation = Vector3(0, 0, 0)
+r_group_choice = []
+r_bounce_choice = PackedInt32Array()
+r_bounce_variation = Vector3(0, 0, 0)
+r_no_coll_chances = 0.0
+r_modulate_variation = Vector3(0, 0, 0)
+r_trail_length_variation = Vector3(0, 0, 0)
+r_trail_color_variation = Vector3(0, 0, 0)
+r_rotating_variation = Vector3(0, 0, 0)
+r_death_after_choice = PackedFloat32Array()
+r_death_after_variation = Vector3(0, 0, 0)
+r_death_outside_chances = 0.0
+r_dir_equation_choice = PackedStringArray()
+r_curve_choice = []
+r_speed_multi_curve_choice = []
+r_speed_multi_iter_variation = Vector3(0, 0, 0)
+r_speed_multi_scale_variation = Vector3(0, 0, 0)
+r_trigger_choice = PackedStringArray()
+r_wait_for_shot_chances = 0.0
+r_homing_target_choice = []
+r_special_target_choice = PackedStringArray()
+r_group_target_choice = PackedStringArray()
+r_pos_target_choice = PackedVector2Array()
+r_steer_choice = PackedFloat32Array()
+r_steer_variation = Vector3(0, 0, 0)
+r_homing_delay_choice = PackedFloat32Array()
+r_homing_delay_variation = Vector3(0, 0, 0)
+r_homing_dur_choice = PackedFloat32Array()
+r_homing_dur_variation = Vector3(0, 0, 0)
+r_scale_multi_curve_choice = []
+r_scale_multi_iter_variation = Vector3(0, 0, 0)
+r_scale_multi_scale_variation = Vector3(0, 0, 0)
+
+[sub_resource type="Curve2D" id="Curve2D_3bn7q"]
+
+[sub_resource type="Curve" id="Curve_n2r4g"]
+
+[sub_resource type="Resource" id="Resource_sedk5"]
+script = ExtResource("12_4u7m0")
+ID = "grape_angry"
+texture = "grape_angry"
+collision = "grape"
+SFX = ""
+tex_scale = 1.0
+tex_skew = 0.0
+
+[sub_resource type="Curve" id="Curve_hiidl"]
+
+[sub_resource type="PackedDataContainer" id="PackedDataContainer_835v2"]
+script = ExtResource("13_d1xoi")
+damage = 1.0
+speed = 130.0
+scale = 1.0
+angle = 0.0
+groups = PackedStringArray()
+custom_data = {
+"test": Vector3(0, 2, 3)
+}
+death_after_time = 4.0
+death_outside_box = Rect2(0, 0, 0, 0)
+death_from_collision = true
+death_speed_under = 0.0
+death_culling_overwrite = 3
+spec_modulate_loop = 0.0
+anim_idle = SubResource("Resource_sedk5")
+anim_spawn = SubResource("Resource_sedk5")
+anim_shoot = SubResource("Resource_sedk5")
+anim_waiting = SubResource("Resource_sedk5")
+anim_delete = SubResource("Resource_sedk5")
+anim_more = Array[ExtResource("12_4u7m0")]([])
+spec_trail_length = 0.0
+spec_trail_width = 0.0
+spec_trail_modulate = Color(1, 1, 1, 1)
+a_direction_equation = ""
+a_angular_equation = ""
+a_curve_movement = 0
+a_speed_multi_iterations = 0
+a_speed_multi_scale = 0.0
+a_speed_multiplier = SubResource("Curve_n2r4g")
+spec_bounces = 0
+spec_no_collision = false
+spec_rotating_speed = 0.0
+spec_only_spin_sprite = true
+spec_weight = 1.0
+scale_multi_iterations = 0
+scale_multiplier = SubResource("Curve_hiidl")
+scale_multi_scale = 1.0
+trigger_container = ""
+trigger_wait_for_shot = true
+homing_type = 0
+homing_target = NodePath("")
+homing_steer = 0.0
+homing_time_start = 0.0
+homing_duration = 999.0
+homing_detection_dist = 0.0
+homing_start_signal = ""
+homing_range = Vector2(9999, 20)
+homing_imprecision = Vector2(0, 0)
+r_randomisation_chances = 1.0
+r_speed_choice = PackedFloat32Array()
+r_speed_variation = Vector3(0, 0, 0)
+r_scale_choice = PackedFloat32Array()
+r_scale_variation = Vector3(0, 0, 0)
+r_angle_choice = PackedFloat32Array()
+r_angle_variation = Vector3(0, 0, 0)
+r_group_choice = []
+r_bounce_choice = PackedInt32Array()
+r_bounce_variation = Vector3(0, 0, 0)
+r_no_coll_chances = 0.0
+r_modulate_variation = Vector3(0, 0, 0)
+r_trail_length_variation = Vector3(0, 0, 0)
+r_trail_color_variation = Vector3(0, 0, 0)
+r_rotating_variation = Vector3(0, 0, 0)
+r_death_after_choice = PackedFloat32Array()
+r_death_after_variation = Vector3(0, 0, 0)
+r_death_outside_chances = 0.0
+r_dir_equation_choice = PackedStringArray()
+r_curve_choice = []
+r_speed_multi_curve_choice = []
+r_speed_multi_iter_variation = Vector3(0, 0, 0)
+r_speed_multi_scale_variation = Vector3(0, 0, 0)
+r_trigger_choice = PackedStringArray()
+r_wait_for_shot_chances = 0.0
+r_homing_target_choice = []
+r_special_target_choice = PackedStringArray()
+r_group_target_choice = PackedStringArray()
+r_pos_target_choice = PackedVector2Array()
+r_steer_choice = PackedFloat32Array()
+r_steer_variation = Vector3(0, 0, 0)
+r_homing_delay_choice = PackedFloat32Array()
+r_homing_delay_variation = Vector3(0, 0, 0)
+r_homing_dur_choice = PackedFloat32Array()
+r_homing_dur_variation = Vector3(0, 0, 0)
+r_scale_multi_curve_choice = []
+r_scale_multi_iter_variation = Vector3(0, 0, 0)
+r_scale_multi_scale_variation = Vector3(0, 0, 0)
+
+[node name="GrapeBoss" type="CharacterBody2D" node_paths=PackedStringArray("animation_player", "sprite", "spawnpoints", "attack_1", "attack_2", "grape_full_1")]
+collision_layer = 2
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("1_kdn68")
+animation_player = NodePath("Sprite/AnimationPlayer")
+sprite = NodePath("Sprite")
+spawnpoints = NodePath("Spawnpoints")
+attack_1 = NodePath("AttackPattern1")
+attack_2 = NodePath("AttackPattern2")
+grape_full_1 = NodePath("Spawnpoints/Full/GrapeFull1")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_i5yl4")
+texture = ExtResource("1_auvfe")
+hframes = 6
+vframes = 6
+frame = 13
+metadata/_aseprite_wizard_config_ = {
+"i_mode": -1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/bosses/grape/art",
+"o_name": "grape_boss",
+"only_visible": false,
+"player": "Sprite/AnimationPlayer",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/grapeboss/grape_boss.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "c00293995e542d3d4b6f31f54b82a6f5"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_s4dkk")
+}
+
+[node name="BossHealthComponent" parent="." instance=ExtResource("2_pypw4")]
+max_health = 1000.0
+boss_cutscene_animation_string = "grape"
+
+[node name="EnemyHurtbox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_4fv75")]
+health_component = NodePath("../BossHealthComponent")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="EnemyHurtbox"]
+polygon = PackedVector2Array(17, 112, 53, 99, 54, 57, 82, 32, 78, -45, 71, -68, 48, -83, 23, -111, -40, -109, -64, -70, -75, -22, -58, 38, -59, 58, -17, 83)
+
+[node name="EnemyHitbox" parent="." instance=ExtResource("6_kh7p1")]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="EnemyHitbox"]
+polygon = PackedVector2Array(26, 86, -41, 45, -59, -34, -24, -60, 54, -63, 70, 8)
+
+[node name="AttackPattern1" type="Node" parent="." node_paths=PackedStringArray("grape_full_2", "grape_full_3", "grape_full_4")]
+script = ExtResource("7_3aorh")
+pivot_strength = 15.0
+grape_full_2 = NodePath("../Spawnpoints/Full/GrapeFull2")
+grape_full_3 = NodePath("../Spawnpoints/Full/GrapeFull3")
+grape_full_4 = NodePath("../Spawnpoints/Full/GrapeFull4")
+
+[node name="Full2" type="Timer" parent="AttackPattern1"]
+wait_time = 8.0
+one_shot = true
+
+[node name="Full3" type="Timer" parent="AttackPattern1"]
+wait_time = 8.0
+one_shot = true
+
+[node name="Transition" type="Timer" parent="AttackPattern1"]
+one_shot = true
+
+[node name="Start" type="Timer" parent="AttackPattern1"]
+one_shot = true
+
+[node name="AttackPattern2" type="Node" parent="." node_paths=PackedStringArray("animation_player", "attack_1", "attack_2", "attack_3", "start_timer", "attack_timer", "transition_timer")]
+script = ExtResource("8_poang")
+animation_player = NodePath("../Sprite/AnimationPlayer")
+attack_1 = NodePath("../Spawnpoints/Half/Half1")
+attack_2 = NodePath("../Spawnpoints/Half/Half2")
+attack_3 = NodePath("../Spawnpoints/Half/Half3")
+start_timer = NodePath("Start")
+attack_timer = NodePath("Attack")
+transition_timer = NodePath("Transition")
+
+[node name="Start" type="Timer" parent="AttackPattern2"]
+wait_time = 0.1
+one_shot = true
+
+[node name="Attack" type="Timer" parent="AttackPattern2"]
+wait_time = 10.0
+one_shot = true
+
+[node name="Transition" type="Timer" parent="AttackPattern2"]
+wait_time = 1.5
+one_shot = true
+
+[node name="Spawnpoints" type="Node2D" parent="."]
+
+[node name="Full" type="Node2D" parent="Spawnpoints"]
+
+[node name="GrapeFull1" type="Node2D" parent="Spawnpoints/Full"]
+script = ExtResource("8_g7nq5")
+active = false
+auto_pattern_id = "grapefull1"
+rotating_speed = 1.0
+pool_amount = 100
+r_active_chances = 1.0
+r_rotating_variation = Vector3(0, 0, 0)
+r_pattern_choice = ""
+r_start_time_choice = ""
+r_start_time_variation = Vector3(0, 0, 0)
+r_start_distance_choice = ""
+r_start_distance_variation = Vector3(0, 0, 0)
+
+[node name="GrapeFull2" type="Node2D" parent="Spawnpoints/Full"]
+script = ExtResource("8_g7nq5")
+active = false
+auto_pattern_id = "grapefull2"
+process_id = -2
+rotating_speed = 0.005
+pool_amount = 75
+r_active_chances = 1.0
+r_rotating_variation = Vector3(0, 0, 0)
+r_pattern_choice = ""
+r_start_time_choice = ""
+r_start_time_variation = Vector3(0, 0, 0)
+r_start_distance_choice = ""
+r_start_distance_variation = Vector3(0, 0, 0)
+
+[node name="GrapeFull3" type="Node2D" parent="Spawnpoints/Full"]
+script = ExtResource("8_g7nq5")
+active = false
+auto_pattern_id = "grapefull3"
+process_id = -2
+r_active_chances = 1.0
+r_rotating_variation = Vector3(0, 0, 0)
+r_pattern_choice = ""
+r_start_time_choice = ""
+r_start_time_variation = Vector3(0, 0, 0)
+r_start_distance_choice = ""
+r_start_distance_variation = Vector3(0, 0, 0)
+
+[node name="GrapeFull4" type="Node2D" parent="Spawnpoints/Full"]
+script = ExtResource("8_g7nq5")
+active = false
+auto_pattern_id = "grapefull4"
+r_active_chances = 1.0
+r_rotating_variation = Vector3(0, 0, 0)
+r_pattern_choice = ""
+r_start_time_choice = ""
+r_start_time_variation = Vector3(0, 0, 0)
+r_start_distance_choice = ""
+r_start_distance_variation = Vector3(0, 0, 0)
+
+[node name="Half" type="Node2D" parent="Spawnpoints"]
+
+[node name="Half1" type="Node2D" parent="Spawnpoints/Half"]
+script = ExtResource("8_g7nq5")
+active = false
+auto_pattern_id = "grapehalf1"
+r_active_chances = 1.0
+r_rotating_variation = Vector3(0, 0, 0)
+r_pattern_choice = ""
+r_start_time_choice = ""
+r_start_time_variation = Vector3(0, 0, 0)
+r_start_distance_choice = ""
+r_start_distance_variation = Vector3(0, 0, 0)
+
+[node name="Half2" type="Node2D" parent="Spawnpoints/Half"]
+script = ExtResource("8_g7nq5")
+active = false
+auto_pattern_id = "grapehalf2"
+rotating_speed = 0.004
+r_active_chances = 1.0
+r_rotating_variation = Vector3(0, 0, 0)
+r_pattern_choice = ""
+r_start_time_choice = ""
+r_start_time_variation = Vector3(0, 0, 0)
+r_start_distance_choice = ""
+r_start_distance_variation = Vector3(0, 0, 0)
+
+[node name="Half3" type="Node2D" parent="Spawnpoints/Half"]
+script = ExtResource("8_g7nq5")
+active = false
+auto_pattern_id = "grapehalf3"
+rotating_speed = 0.13
+r_active_chances = 1.0
+r_rotating_variation = Vector3(0, 0, 0)
+r_pattern_choice = ""
+r_start_time_choice = ""
+r_start_time_variation = Vector3(0, 0, 0)
+r_start_distance_choice = ""
+r_start_distance_variation = Vector3(0, 0, 0)
+
+[node name="SpawnPatterns" type="Node2D" parent="."]
+
+[node name="Full" type="Node2D" parent="SpawnPatterns"]
+
+[node name="GrapeFull1" type="Path2D" parent="SpawnPatterns/Full"]
+curve = SubResource("Curve2D_njoth")
+script = ExtResource("9_2qf8i")
+id = "grapefull1"
+pattern = SubResource("NavigationPolygon_gu5bx")
+
+[node name="GrapeFull2" type="Path2D" parent="SpawnPatterns/Full"]
+curve = SubResource("Curve2D_qabxy")
+script = ExtResource("9_2qf8i")
+id = "grapefull2"
+pattern = SubResource("NavigationPolygon_4m7sn")
+
+[node name="GrapeFull3" type="Path2D" parent="SpawnPatterns/Full"]
+curve = SubResource("Curve2D_jxjai")
+script = ExtResource("9_2qf8i")
+id = "grapefull3"
+pattern = SubResource("NavigationPolygon_ionw8")
+
+[node name="GrapeFull4" type="Path2D" parent="SpawnPatterns/Full"]
+curve = SubResource("Curve2D_wa2qu")
+script = ExtResource("9_2qf8i")
+id = "grapefull4"
+pattern = SubResource("NavigationPolygon_7de51")
+
+[node name="Half" type="Node2D" parent="SpawnPatterns"]
+
+[node name="Half1" type="Path2D" parent="SpawnPatterns/Half"]
+curve = SubResource("Curve2D_krped")
+script = ExtResource("9_2qf8i")
+id = "grapehalf1"
+pattern = SubResource("NavigationPolygon_rxe3u")
+
+[node name="Half2" type="Path2D" parent="SpawnPatterns/Half"]
+curve = SubResource("Curve2D_ur1c8")
+script = ExtResource("9_2qf8i")
+id = "grapehalf2"
+pattern = SubResource("NavigationPolygon_fkrpr")
+
+[node name="Half3" type="Path2D" parent="SpawnPatterns/Half"]
+curve = SubResource("Curve2D_3xgtb")
+script = ExtResource("9_2qf8i")
+id = "grapehalf3"
+pattern = SubResource("NavigationPolygon_a37h7")
+
+[node name="BulletPatterns" type="Node2D" parent="."]
+
+[node name="Full" type="Node2D" parent="BulletPatterns"]
+
+[node name="GrapeFull" type="Path2D" parent="BulletPatterns/Full"]
+curve = SubResource("Curve2D_6gm15")
+script = ExtResource("11_ajtqr")
+id = "grapefull1"
+props = SubResource("PackedDataContainer_jh28t")
+
+[node name="GrapeFull2" type="Path2D" parent="BulletPatterns/Full"]
+curve = SubResource("Curve2D_8cd36")
+script = ExtResource("11_ajtqr")
+id = "grapefull2"
+props = SubResource("PackedDataContainer_qua10")
+
+[node name="GrapeFull3" type="Path2D" parent="BulletPatterns/Full"]
+curve = SubResource("Curve2D_d268m")
+script = ExtResource("11_ajtqr")
+id = "grapefull3"
+props = SubResource("PackedDataContainer_csux2")
+
+[node name="Half" type="Node2D" parent="BulletPatterns"]
+
+[node name="Half1" type="Path2D" parent="BulletPatterns/Half"]
+curve = SubResource("Curve2D_3bn7q")
+script = ExtResource("11_ajtqr")
+id = "grapehalf1"
+props = SubResource("PackedDataContainer_835v2")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(24, 77, -33, 39, -49, -36, -16, -52, 37, -59, 55, -14, 44, 44)
+
+[connection signal="area_entered" from="EnemyHitbox" to="EnemyHitbox" method="_on_area_entered"]
+[connection signal="timeout" from="AttackPattern1/Start" to="AttackPattern1" method="_on_start_timeout"]
+[connection signal="timeout" from="AttackPattern2/Start" to="AttackPattern2" method="_on_start_timeout"]
+[connection signal="timeout" from="AttackPattern2/Attack" to="AttackPattern2" method="_on_attack_timeout"]
+[connection signal="timeout" from="AttackPattern2/Transition" to="AttackPattern2" method="_on_transition_timeout"]

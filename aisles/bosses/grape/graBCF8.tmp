@@ -1,0 +1,318 @@
+[gd_scene load_steps=29 format=3 uid="uid://bkvvyilkp1mq8"]
+
+[ext_resource type="Texture2D" uid="uid://kphsrj5m53l7" path="res://aisles/bosses/grape/art/grape_boss.png" id="1_auvfe"]
+[ext_resource type="Shader" path="res://miscellaneous/enemy_flash.gdshader" id="1_crokl"]
+[ext_resource type="Script" path="res://aisles/bosses/grape/grape_boss.gd" id="1_kdn68"]
+[ext_resource type="PackedScene" uid="uid://dfsj6cpisvgbu" path="res://components/scenes/boss_health_component.tscn" id="2_pypw4"]
+[ext_resource type="PackedScene" uid="uid://bvr04i1rtrr5n" path="res://components/scenes/enemy_hurtbox.tscn" id="3_4fv75"]
+[ext_resource type="PackedScene" uid="uid://d165eow85pjqq" path="res://components/scenes/enemy_hitbox.tscn" id="6_kh7p1"]
+[ext_resource type="Script" path="res://components/scripts/enemy_hitbox.gd" id="7_tfxw7"]
+[ext_resource type="Script" path="res://addons/BulletUpHell/Nodes/BuHSpawnPoint.gd" id="8_g7nq5"]
+[ext_resource type="Script" path="res://addons/BulletUpHell/Nodes/BuHPattern.gd" id="9_2qf8i"]
+[ext_resource type="Script" path="res://addons/BulletUpHell/SpawnPatterns/PatternCircle.gd" id="10_clu7d"]
+[ext_resource type="Script" path="res://addons/BulletUpHell/Nodes/BuHBulletProperties.gd" id="11_ajtqr"]
+[ext_resource type="Script" path="res://addons/BulletUpHell/Bullet/animStates.gd" id="12_4u7m0"]
+[ext_resource type="Script" path="res://addons/BulletUpHell/Bullet/BulletProps.gd" id="13_d1xoi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i5yl4"]
+shader = ExtResource("1_crokl")
+shader_parameter/flash_amount = 0.0
+
+[sub_resource type="Animation" id="Animation_4evp7"]
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_goxna"]
+resource_name = "angry"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_v0wvk"]
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s4dkk"]
+_data = {
+"active": SubResource("Animation_4evp7"),
+"angry": SubResource("Animation_goxna"),
+"inactive": SubResource("Animation_v0wvk")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5o4oc"]
+radius = 60.0
+height = 146.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eyp3x"]
+radius = 70.0
+height = 230.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l8vmv"]
+radius = 63.0
+height = 152.0
+
+[sub_resource type="Curve2D" id="Curve2D_njoth"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_gu5bx"]
+resource_name = "PatternCircle"
+script = ExtResource("10_clu7d")
+radius = 0.0
+angle_total = 6.28319
+angle_decal = 0.0
+center = 0
+symmetric = false
+bullet = "grapefull1"
+nbr = 16
+iterations = -1
+cooldown_spawn = 2.0
+cooldown_shoot = 0.0
+cooldown_next_spawn = 0.0
+cooldown_next_shoot = 0.0
+cooldown_layers = PackedVector2Array()
+cooldown_stasis = false
+on_interruption = 0
+pattern_angle = 0.0
+pattern_angle_target = NodePath("")
+pattern_angle_mouse = false
+wait_behavior = 0
+wait_tween_momentum = 0
+wait_tween_length = 0.0
+wait_tween_time = 0.0
+forced_angle = 0.0
+forced_target = NodePath("")
+forced_lookat_mouse = false
+forced_pattern_lookat = true
+impulse = 0
+bullet_list = Array[String]([])
+skip_step = 0
+skip_list = Array[PackedInt32Array]([])
+skip_in_list = true
+
+[sub_resource type="Curve2D" id="Curve2D_6gm15"]
+
+[sub_resource type="Curve" id="Curve_rcldh"]
+
+[sub_resource type="Resource" id="Resource_1o3l3"]
+script = ExtResource("12_4u7m0")
+ID = "grape"
+texture = "grape"
+collision = "grape"
+SFX = ""
+tex_scale = 1.0
+tex_skew = 0.0
+
+[sub_resource type="Curve" id="Curve_fedim"]
+
+[sub_resource type="PackedDataContainer" id="PackedDataContainer_jh28t"]
+script = ExtResource("13_d1xoi")
+damage = 1.0
+speed = 125.0
+scale = 1.0
+angle = 0.0
+groups = PackedStringArray()
+custom_data = {}
+death_after_time = 5.0
+death_outside_box = Rect2(0, 0, 0, 0)
+death_from_collision = true
+death_speed_under = 0.0
+death_culling_overwrite = 0
+spec_modulate_loop = 0.0
+anim_idle = SubResource("Resource_1o3l3")
+anim_spawn = SubResource("Resource_1o3l3")
+anim_shoot = SubResource("Resource_1o3l3")
+anim_waiting = SubResource("Resource_1o3l3")
+anim_delete = SubResource("Resource_1o3l3")
+anim_more = Array[ExtResource("12_4u7m0")]([])
+spec_trail_length = 0.0
+spec_trail_width = 0.0
+spec_trail_modulate = Color(0, 0, 0, 1)
+a_direction_equation = ""
+a_angular_equation = ""
+a_curve_movement = 0
+a_speed_multi_iterations = 0
+a_speed_multi_scale = 0.0
+a_speed_multiplier = SubResource("Curve_rcldh")
+spec_bounces = 0
+spec_no_collision = false
+spec_rotating_speed = 0.0
+spec_only_spin_sprite = false
+spec_weight = 0.0
+scale_multi_iterations = 0
+scale_multiplier = SubResource("Curve_fedim")
+scale_multi_scale = 0.0
+trigger_container = ""
+trigger_wait_for_shot = false
+homing_type = 0
+homing_target = NodePath("")
+homing_steer = 0.0
+homing_time_start = 0.0
+homing_duration = 0.0
+homing_detection_dist = 0.0
+homing_start_signal = ""
+homing_range = Vector2(0, 0)
+homing_imprecision = Vector2(0, 0)
+r_randomisation_chances = 0.0
+r_speed_choice = PackedFloat32Array()
+r_speed_variation = Vector3(0, 0, 0)
+r_scale_choice = PackedFloat32Array()
+r_scale_variation = Vector3(0, 0, 0)
+r_angle_choice = PackedFloat32Array()
+r_angle_variation = Vector3(0, 0, 0)
+r_group_choice = []
+r_bounce_choice = PackedInt32Array()
+r_bounce_variation = Vector3(0, 0, 0)
+r_no_coll_chances = 0.0
+r_modulate_variation = Vector3(0, 0, 0)
+r_trail_length_variation = Vector3(0, 0, 0)
+r_trail_color_variation = Vector3(0, 0, 0)
+r_rotating_variation = Vector3(0, 0, 0)
+r_death_after_choice = PackedFloat32Array()
+r_death_after_variation = Vector3(0, 0, 0)
+r_death_outside_chances = 0.0
+r_dir_equation_choice = PackedStringArray()
+r_curve_choice = []
+r_speed_multi_curve_choice = []
+r_speed_multi_iter_variation = Vector3(0, 0, 0)
+r_speed_multi_scale_variation = Vector3(0, 0, 0)
+r_trigger_choice = PackedStringArray()
+r_wait_for_shot_chances = 0.0
+r_homing_target_choice = []
+r_special_target_choice = PackedStringArray()
+r_group_target_choice = PackedStringArray()
+r_pos_target_choice = PackedVector2Array()
+r_steer_choice = PackedFloat32Array()
+r_steer_variation = Vector3(0, 0, 0)
+r_homing_delay_choice = PackedFloat32Array()
+r_homing_delay_variation = Vector3(0, 0, 0)
+r_homing_dur_choice = PackedFloat32Array()
+r_homing_dur_variation = Vector3(0, 0, 0)
+r_scale_multi_curve_choice = []
+r_scale_multi_iter_variation = Vector3(0, 0, 0)
+r_scale_multi_scale_variation = Vector3(0, 0, 0)
+
+[node name="GrapeBoss" type="CharacterBody2D" node_paths=PackedStringArray("animation_player", "sprite", "spawnpoints", "grape_full_1")]
+collision_layer = 2
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("1_kdn68")
+animation_player = NodePath("Sprite/AnimationPlayer")
+sprite = NodePath("Sprite")
+spawnpoints = NodePath("Spawnpoints")
+grape_full_1 = NodePath("Spawnpoints/GrapeFull1")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_i5yl4")
+texture = ExtResource("1_auvfe")
+hframes = 3
+vframes = 2
+frame = 4
+metadata/_aseprite_wizard_config_ = {
+"i_mode": -1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/bosses/grape/art",
+"o_name": "grape_boss",
+"only_visible": false,
+"player": "AnimationPlayer",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/grapeboss/grape_boss.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "87f91cc995e6545a4c8c758dce79389b"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_s4dkk")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_5o4oc")
+
+[node name="BossHealthComponent" parent="." instance=ExtResource("2_pypw4")]
+max_health = 2000.0
+
+[node name="EnemyHurtbox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_4fv75")]
+health_component = NodePath("../BossHealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHurtbox"]
+shape = SubResource("CapsuleShape2D_eyp3x")
+
+[node name="EnemyHitbox" parent="." instance=ExtResource("6_kh7p1")]
+script = ExtResource("7_tfxw7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox"]
+shape = SubResource("CapsuleShape2D_l8vmv")
+
+[node name="Spawnpoints" type="Node2D" parent="."]
+
+[node name="GrapeFull1" type="Node2D" parent="Spawnpoints"]
+script = ExtResource("8_g7nq5")
+active = false
+auto_pattern_id = "grapefull1"
+rotating_speed = 125.0
+pool_amount = 200
+r_active_chances = 1.0
+r_rotating_variation = Vector3(0, 0, 0)
+r_pattern_choice = ""
+r_start_time_choice = ""
+r_start_time_variation = Vector3(0, 0, 0)
+r_start_distance_choice = ""
+r_start_distance_variation = Vector3(0, 0, 0)
+
+[node name="SpawnPatterns" type="Node2D" parent="."]
+
+[node name="GrapeFull1" type="Path2D" parent="SpawnPatterns"]
+curve = SubResource("Curve2D_njoth")
+script = ExtResource("9_2qf8i")
+id = "grapefull1"
+pattern = SubResource("NavigationPolygon_gu5bx")
+
+[node name="BulletPatterns" type="Node2D" parent="."]
+
+[node name="GrapeFull" type="Path2D" parent="BulletPatterns"]
+curve = SubResource("Curve2D_6gm15")
+script = ExtResource("11_ajtqr")
+id = "grapefull1"
+props = SubResource("PackedDataContainer_jh28t")
+
+[connection signal="area_entered" from="EnemyHitbox" to="EnemyHitbox" method="_on_area_entered"]

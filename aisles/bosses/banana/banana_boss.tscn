@@ -1,0 +1,104 @@
+[gd_scene load_steps=11 format=3 uid="uid://go6ftjkh6w1s"]
+
+[ext_resource type="Script" path="res://aisles/bosses/banana/banana_boss.gd" id="1_0exk6"]
+[ext_resource type="Texture2D" uid="uid://burt17ekyj14t" path="res://aisles/bosses/banana/art/banana_boss.png" id="1_pkxge"]
+[ext_resource type="Shader" path="res://miscellaneous/enemy_flash.gdshader" id="2_0m8a5"]
+[ext_resource type="PackedScene" uid="uid://dfsj6cpisvgbu" path="res://components/scenes/boss_health_component.tscn" id="2_mco36"]
+[ext_resource type="PackedScene" uid="uid://bvr04i1rtrr5n" path="res://components/scenes/enemy_hurtbox.tscn" id="3_re8xx"]
+[ext_resource type="PackedScene" uid="uid://d165eow85pjqq" path="res://components/scenes/enemy_hitbox.tscn" id="4_fepfr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i5yl4"]
+shader = ExtResource("2_0m8a5")
+shader_parameter/flash_amount = 0.0
+
+[sub_resource type="Animation" id="Animation_nafq1"]
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_4lp56"]
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_veyjp"]
+_data = {
+"active": SubResource("Animation_4lp56"),
+"inactive": SubResource("Animation_nafq1")
+}
+
+[node name="BananaBoss" type="CharacterBody2D" node_paths=PackedStringArray("animation_player", "sprite")]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_0exk6")
+animation_player = NodePath("Sprite/AnimationPlayer")
+sprite = NodePath("Sprite")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_i5yl4")
+texture = ExtResource("1_pkxge")
+hframes = 2
+metadata/_aseprite_wizard_config_ = {
+"i_mode": -1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/bosses/banana/art",
+"o_name": "banana_boss",
+"only_visible": false,
+"player": "Sprite/AnimationPlayer",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/bananaboss/banana_boss.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "e6ac336ee74b692fd33f5cb5a13654a4"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+libraries = {
+"": SubResource("AnimationLibrary_veyjp")
+}
+
+[node name="BossHealthComponent" parent="." instance=ExtResource("2_mco36")]
+max_health = 30000.0
+boss_cutscene_animation_string = "banana"
+
+[node name="EnemyHurtbox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_re8xx")]
+health_component = NodePath("../BossHealthComponent")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="EnemyHurtbox"]
+polygon = PackedVector2Array(-53, 112, -35, 92, 13, 80, 39, 61, 53, 25, 65, -23, 62, -63, 45, -93, 28, -103, 10, -88, 2, -68, 5, -15, -6, 25, -41, 75, -59, 104)
+
+[node name="EnemyHitbox" parent="." instance=ExtResource("4_fepfr")]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="EnemyHitbox"]
+polygon = PackedVector2Array(-36, 85, 13, 73, 44, 21, 58, -42, 45, -73, 30, -80, 15, -70, 12, -5, -7, 47)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-29, 81, 9, 71, 38, 22, 54, -40, 42, -71, 30, -76, 18, -69, 16, 2, -2, 50)
+
+[connection signal="area_entered" from="EnemyHitbox" to="EnemyHitbox" method="_on_area_entered"]

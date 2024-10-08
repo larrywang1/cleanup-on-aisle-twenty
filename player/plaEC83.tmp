@@ -1,0 +1,93 @@
+[gd_scene load_steps=10 format=3 uid="uid://kfmkg11m0106"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_uyf5b"]
+[ext_resource type="Script" path="res://player/player_components/dash_component.gd" id="2_uwfer"]
+[ext_resource type="Texture2D" uid="uid://chgdq83isbpxe" path="res://icon.svg" id="2_uwvu0"]
+[ext_resource type="Script" path="res://player/player_components/stamina_component.gd" id="3_uk7yy"]
+[ext_resource type="Script" path="res://player/player_components/player_health_component.gd" id="4_fr0x2"]
+[ext_resource type="Script" path="res://player/player_components/player_hurtbox_component.gd" id="5_1crtt"]
+[ext_resource type="Script" path="res://player/player_components/attack_component.gd" id="6_q0urc"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7a4up"]
+radius = 6.0
+height = 22.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8bksn"]
+radius = 6.0
+height = 22.0
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("dash_component", "stamina_component", "health_component", "hurtbox_component") groups=["player"]]
+collision_mask = 2
+motion_mode = 1
+script = ExtResource("1_uyf5b")
+max_speed = 80
+acceleration = 1000
+friction = 1000
+dash_component = NodePath("DashComponent")
+stamina_component = NodePath("StaminaComponent")
+health_component = NodePath("PlayerHealthComponent")
+hurtbox_component = NodePath("PlayerHurtboxComponent")
+
+[node name="DashComponent" type="Node2D" parent="." node_paths=PackedStringArray("dash_timer", "stamina_component", "health_component")]
+script = ExtResource("2_uwfer")
+dash_timer = NodePath("DashCooldown")
+dash_speed = 400
+stamina_component = NodePath("../StaminaComponent")
+health_component = NodePath("../PlayerHealthComponent")
+
+[node name="DashCooldown" type="Timer" parent="DashComponent"]
+wait_time = 0.2
+one_shot = true
+
+[node name="StaminaComponent" type="Node2D" parent="." node_paths=PackedStringArray("stamina_timer")]
+script = ExtResource("3_uk7yy")
+max_stamina = 3
+stamina_timer = NodePath("StaminaRegeneration")
+initial_stamina_cooldown = 2.0
+stamina_cooldown = 0.2
+
+[node name="StaminaRegeneration" type="Timer" parent="StaminaComponent"]
+wait_time = 0.5
+
+[node name="PlayerHealthComponent" type="Node2D" parent="." node_paths=PackedStringArray("invin_timer")]
+script = ExtResource("4_fr0x2")
+max_health = 4
+invin_timer = NodePath("InvinTimer")
+
+[node name="InvinTimer" type="Timer" parent="PlayerHealthComponent"]
+one_shot = true
+
+[node name="PlayerHurtboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
+collision_layer = 8
+collision_mask = 16
+script = ExtResource("5_1crtt")
+health_component = NodePath("../PlayerHealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtboxComponent"]
+shape = SubResource("CapsuleShape2D_7a4up")
+
+[node name="AttackComponent" type="Node2D" parent="." node_paths=PackedStringArray("normal_attack", "charged_attack", "charged_attack_timer")]
+script = ExtResource("6_q0urc")
+normal_attack = NodePath("NormalAttack")
+charged_attack = NodePath("ChargedAttack")
+charged_attack_timer = NodePath("StartChargedAttackTimer")
+
+[node name="NormalAttack" type="Node2D" parent="AttackComponent"]
+
+[node name="ChargedAttack" type="Node2D" parent="AttackComponent"]
+
+[node name="StartChargedAttackTimer" type="Timer" parent="AttackComponent"]
+wait_time = 0.2
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1.19209e-07, 1)
+scale = Vector2(0.15625, 0.242188)
+texture = ExtResource("2_uwvu0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_8bksn")
+
+[connection signal="timeout" from="DashComponent/DashCooldown" to="DashComponent" method="_on_dash_cooldown_timeout"]
+[connection signal="timeout" from="StaminaComponent/StaminaRegeneration" to="StaminaComponent" method="recover_stamina"]
+[connection signal="timeout" from="PlayerHealthComponent/InvinTimer" to="PlayerHealthComponent" method="_on_invin_timer_timeout"]
