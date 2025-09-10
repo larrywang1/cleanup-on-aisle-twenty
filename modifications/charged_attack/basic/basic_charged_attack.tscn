@@ -4,7 +4,7 @@
 
 [node name="BasicChargedAttack" type="Node2D" node_paths=PackedStringArray("spawn_marker", "charge_timer")]
 script = ExtResource("1_ivd7u")
-damage_scaling = 5.0
+damage_scaling = 6.5
 spawn_marker = NodePath("SpawnMarker")
 charge_timer = NodePath("ChargeTimer")
 shake_time = 0.2

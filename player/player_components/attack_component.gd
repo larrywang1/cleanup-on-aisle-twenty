@@ -9,7 +9,17 @@ enum states {
 	NORMAL,
 	CHARGING
 }
-var state : states = states.INACTIVE
+var state : states = states.INACTIVE:
+	get: return state
+	set(value):
+		state = value
+		if state == states.NORMAL:
+			player.max_speed = player.original_max_speed - normal_attack.get_child(0).slow
+		elif state == states.CHARGING:
+			player.max_speed = player.original_max_speed - charged_attack.get_child(0).slow
+		elif state == states.INACTIVE:
+			player.max_speed = player.original_max_speed
+
 
 func _process(_delta: float) -> void:
 	if not player.is_dashing:
@@ -25,12 +35,6 @@ func _process(_delta: float) -> void:
 			charged_attack.get_child(0).release(player.aiming_direction.normalized())
 		if state == states.NORMAL and not cooldown_timer.time_left:
 			normal()
-	if state == states.NORMAL:
-		player.max_speed = player.original_max_speed - normal_attack.get_child(0).slow
-	elif state == states.CHARGING:
-		player.max_speed = player.original_max_speed - charged_attack.get_child(0).slow
-	elif state == states.INACTIVE:
-		player.max_speed = player.original_max_speed
 
 func normal() -> void:
 	normal_attack.get_child(0).fire(player.aiming_direction.normalized())
@@ -42,7 +46,7 @@ func start_charged_attack() -> void:
 func cancel() -> void:
 	if state == states.CHARGING:
 		charged_attack.get_child(0).cancel()
-	state = states.INACTIVE
+		state = states.INACTIVE
 
 func set_attack_time(time : float):
 	cooldown_timer.wait_time = time

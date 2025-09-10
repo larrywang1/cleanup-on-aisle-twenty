@@ -30,10 +30,14 @@ func take_damage() -> void:
 	if state == states.VULN:
 		EventBus.screenshake.emit(shake_time, shake_amount)
 		health -= 1
+		if health == 0:
+			EventBus.player_died.emit()
+			return
 		state = states.INVIN
 		invin_timer.start()
 		EventBus.lose_health.emit()
 		flash()
+	
 
 func _on_invin_timer_timeout() -> void:
 	blink_timer.stop()

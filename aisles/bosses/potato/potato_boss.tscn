@@ -1,0 +1,797 @@
+[gd_scene load_steps=31 format=3 uid="uid://c7nbss2h8ldbd"]
+
+[ext_resource type="Texture2D" uid="uid://cjnjwccwaljq5" path="res://aisles/bosses/potato/art/potatoboss.png" id="1_0or0l"]
+[ext_resource type="Script" path="res://aisles/bosses/potato/potato_boss.gd" id="1_r33x2"]
+[ext_resource type="Shader" path="res://miscellaneous/enemy_flash.gdshader" id="1_ydoex"]
+[ext_resource type="PackedScene" uid="uid://dfsj6cpisvgbu" path="res://components/scenes/boss_health_component.tscn" id="2_eimyl"]
+[ext_resource type="PackedScene" uid="uid://d165eow85pjqq" path="res://components/scenes/enemy_hitbox.tscn" id="3_2o6na"]
+[ext_resource type="PackedScene" uid="uid://bvr04i1rtrr5n" path="res://components/scenes/enemy_hurtbox.tscn" id="4_bw373"]
+[ext_resource type="Texture2D" uid="uid://y07mtxfvx3ty" path="res://aisles/bosses/potato/art/potato_eyes.png" id="4_f5rd0"]
+[ext_resource type="Script" path="res://aisles/bosses/potato/french_fry.gd" id="8_6wqxa"]
+[ext_resource type="Script" path="res://aisles/bosses/potato/potato_rotating_attack.gd" id="8_7n5m5"]
+[ext_resource type="Texture2D" uid="uid://igl6nq26iidm" path="res://aisles/bosses/potato/art/french_fry_1.png" id="8_yepxc"]
+[ext_resource type="Script" path="res://aisles/bosses/potato/french_fry_health_component.gd" id="10_c5ieu"]
+[ext_resource type="Texture2D" uid="uid://bceeorxt427vp" path="res://aisles/bosses/potato/art/fry arrow.png" id="10_qdfwi"]
+[ext_resource type="Texture2D" uid="uid://btddxumxayx5e" path="res://aisles/bosses/potato/art/french_fry_2.png" id="11_86thu"]
+[ext_resource type="Texture2D" uid="uid://b7hlso63molfo" path="res://aisles/bosses/potato/art/fryparticle.png" id="13_mcl18"]
+[ext_resource type="Script" path="res://aisles/bosses/potato/tater_tots.gd" id="15_53lw8"]
+[ext_resource type="PackedScene" uid="uid://ddxfi4bbtan2e" path="res://aisles/bosses/potato/mini_potato.tscn" id="16_psyml"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i5yl4"]
+shader = ExtResource("1_ydoex")
+shader_parameter/flash_amount = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0trqx"]
+radius = 27.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_egj0o"]
+radius = 29.0172
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_grxhv"]
+radius = 34.1321
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7fw53"]
+shader = ExtResource("1_ydoex")
+shader_parameter/flash_amount = 0.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yb4q3"]
+radius = 5.0
+height = 52.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4k6em"]
+radius = 6.0
+height = 54.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3iben"]
+radius = 8.0
+height = 58.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nf7af"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 102.15
+initial_velocity_max = 102.15
+angular_velocity_min = -85.16
+angular_velocity_max = -85.16
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 0.0430001
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_whvln"]
+shader = ExtResource("1_ydoex")
+shader_parameter/flash_amount = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_024lk"]
+shader = ExtResource("1_ydoex")
+shader_parameter/flash_amount = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wb4l0"]
+shader = ExtResource("1_ydoex")
+shader_parameter/flash_amount = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7xfee"]
+shader = ExtResource("1_ydoex")
+shader_parameter/flash_amount = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3khj4"]
+shader = ExtResource("1_ydoex")
+shader_parameter/flash_amount = 0.0
+
+[node name="PotatoBoss" type="Node2D"]
+
+[node name="Potato" type="CharacterBody2D" parent="." node_paths=PackedStringArray("sprite")]
+collision_layer = 2
+script = ExtResource("1_r33x2")
+sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="Potato"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_i5yl4")
+texture = ExtResource("1_0or0l")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/bosses/potato/art",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/potatoboss/potatoboss.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "91dbf11e9813ad79b6b0a78c5d18d46b"
+
+[node name="Eyes" type="Sprite2D" parent="Potato/Sprite2D"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_i5yl4")
+texture = ExtResource("4_f5rd0")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/bosses/potato/art",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/potatoboss/potato_eyes.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "46565c6ace64eefd414b56838b03e470"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Potato"]
+position = Vector2(2, 0)
+shape = SubResource("CircleShape2D_0trqx")
+
+[node name="BossHealthComponent" parent="Potato" instance=ExtResource("2_eimyl")]
+max_health = 20000.0
+boss_cutscene_animation_string = "potato"
+damage_reduction = 0.9
+
+[node name="EnemyHitbox" parent="Potato" instance=ExtResource("3_2o6na")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Potato/EnemyHitbox"]
+position = Vector2(2, 0)
+shape = SubResource("CircleShape2D_egj0o")
+
+[node name="EnemyHurtbox" parent="Potato" node_paths=PackedStringArray("health_component") instance=ExtResource("4_bw373")]
+health_component = NodePath("../BossHealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Potato/EnemyHurtbox"]
+position = Vector2(2, 0)
+shape = SubResource("CircleShape2D_grxhv")
+
+[node name="RotatingAttack" type="Node2D" parent="."]
+script = ExtResource("8_7n5m5")
+rotation_speed = 1.2
+
+[node name="Timers" type="Node2D" parent="RotatingAttack"]
+
+[node name="PiercePrepareTimer" type="Timer" parent="RotatingAttack/Timers"]
+wait_time = 0.8
+one_shot = true
+
+[node name="PierceTimer" type="Timer" parent="RotatingAttack/Timers"]
+one_shot = true
+
+[node name="AttackTimer" type="Timer" parent="RotatingAttack/Timers"]
+wait_time = 7.5
+
+[node name="SpinTimer" type="Timer" parent="RotatingAttack/Timers"]
+wait_time = 6.0
+
+[node name="FrenchFry" type="CharacterBody2D" parent="RotatingAttack" node_paths=PackedStringArray("marker1", "marker2", "marker3", "arrow", "sprite2")]
+position = Vector2(0, -100)
+collision_layer = 2
+script = ExtResource("8_6wqxa")
+marker1 = NodePath("../Markers/Marker1")
+marker2 = NodePath("../Markers/Marker7")
+marker3 = NodePath("../Markers/Marker13")
+arrow = NodePath("Sprite2D/Arrow")
+sprite2 = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="RotatingAttack/FrenchFry"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_7fw53")
+texture = ExtResource("8_yepxc")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/bosses/potato/art",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/potatoboss/french_fry_1.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "393ba9991674ea345aee73830b969499"
+
+[node name="Arrow" type="Sprite2D" parent="RotatingAttack/FrenchFry/Sprite2D"]
+visible = false
+texture_filter = 1
+position = Vector2(0, -34)
+texture = ExtResource("10_qdfwi")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/bosses/potato/art",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/potatoboss/fry arrow.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "37a4c45a61dc55b33ee3457a5c8e642b"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RotatingAttack/FrenchFry"]
+shape = SubResource("CapsuleShape2D_yb4q3")
+
+[node name="EnemyHitbox" parent="RotatingAttack/FrenchFry" instance=ExtResource("3_2o6na")]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="RotatingAttack/FrenchFry/EnemyHitbox"]
+shape = SubResource("CapsuleShape2D_4k6em")
+
+[node name="EnemyHurtbox" parent="RotatingAttack/FrenchFry" node_paths=PackedStringArray("health_component") instance=ExtResource("4_bw373")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="RotatingAttack/FrenchFry/EnemyHurtbox"]
+shape = SubResource("CapsuleShape2D_3iben")
+
+[node name="HealthComponent" type="Node2D" parent="RotatingAttack/FrenchFry"]
+script = ExtResource("10_c5ieu")
+max_health = 1000.0
+
+[node name="Timer" type="Timer" parent="RotatingAttack/FrenchFry"]
+wait_time = 5.0
+one_shot = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="RotatingAttack/FrenchFry"]
+modulate = Color(0.992157, 0.847059, 0.207843, 1)
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_nf7af")
+texture = ExtResource("13_mcl18")
+lifetime = 0.3
+
+[node name="Timer2" type="Timer" parent="RotatingAttack/FrenchFry"]
+wait_time = 4.2
+one_shot = true
+
+[node name="FrenchFry2" type="CharacterBody2D" parent="RotatingAttack" node_paths=PackedStringArray("marker1", "marker2", "marker3", "arrow", "sprite2")]
+position = Vector2(86.8, 50)
+rotation = 2.0944
+collision_layer = 2
+script = ExtResource("8_6wqxa")
+marker1 = NodePath("../Markers/Marker2")
+marker2 = NodePath("../Markers/Marker8")
+marker3 = NodePath("../Markers/Marker14")
+arrow = NodePath("Sprite2D/Arrow")
+sprite2 = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="RotatingAttack/FrenchFry2"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_whvln")
+texture = ExtResource("8_yepxc")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/bosses/potato/art",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/potatoboss/french_fry_1.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "393ba9991674ea345aee73830b969499"
+
+[node name="Arrow" type="Sprite2D" parent="RotatingAttack/FrenchFry2/Sprite2D"]
+visible = false
+texture_filter = 1
+position = Vector2(-3.8147e-06, -34)
+texture = ExtResource("10_qdfwi")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/bosses/potato/art",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/potatoboss/fry arrow.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "37a4c45a61dc55b33ee3457a5c8e642b"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RotatingAttack/FrenchFry2"]
+shape = SubResource("CapsuleShape2D_yb4q3")
+
+[node name="EnemyHitbox" parent="RotatingAttack/FrenchFry2" instance=ExtResource("3_2o6na")]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="RotatingAttack/FrenchFry2/EnemyHitbox"]
+shape = SubResource("CapsuleShape2D_4k6em")
+
+[node name="EnemyHurtbox" parent="RotatingAttack/FrenchFry2" node_paths=PackedStringArray("health_component") instance=ExtResource("4_bw373")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="RotatingAttack/FrenchFry2/EnemyHurtbox"]
+shape = SubResource("CapsuleShape2D_3iben")
+
+[node name="HealthComponent" type="Node2D" parent="RotatingAttack/FrenchFry2"]
+script = ExtResource("10_c5ieu")
+max_health = 1000.0
+
+[node name="Timer" type="Timer" parent="RotatingAttack/FrenchFry2"]
+wait_time = 5.0
+one_shot = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="RotatingAttack/FrenchFry2"]
+modulate = Color(0.992157, 0.847059, 0.207843, 1)
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_nf7af")
+texture = ExtResource("13_mcl18")
+lifetime = 0.3
+
+[node name="Timer2" type="Timer" parent="RotatingAttack/FrenchFry2"]
+wait_time = 4.2
+one_shot = true
+
+[node name="FrenchFry3" type="CharacterBody2D" parent="RotatingAttack" node_paths=PackedStringArray("marker1", "marker2", "marker3", "arrow", "sprite2")]
+position = Vector2(-86.6, 50)
+rotation = 4.18879
+collision_layer = 2
+script = ExtResource("8_6wqxa")
+marker1 = NodePath("../Markers/Marker3")
+marker2 = NodePath("../Markers/Marker9")
+marker3 = NodePath("../Markers/Marker15")
+arrow = NodePath("Sprite2D/Arrow")
+sprite2 = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="RotatingAttack/FrenchFry3"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_024lk")
+texture = ExtResource("8_yepxc")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/bosses/potato/art",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/potatoboss/french_fry_1.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "393ba9991674ea345aee73830b969499"
+
+[node name="Arrow" type="Sprite2D" parent="RotatingAttack/FrenchFry3/Sprite2D"]
+visible = false
+texture_filter = 1
+position = Vector2(0, -34)
+texture = ExtResource("10_qdfwi")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/bosses/potato/art",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/potatoboss/fry arrow.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "37a4c45a61dc55b33ee3457a5c8e642b"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RotatingAttack/FrenchFry3"]
+shape = SubResource("CapsuleShape2D_yb4q3")
+
+[node name="EnemyHitbox" parent="RotatingAttack/FrenchFry3" instance=ExtResource("3_2o6na")]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="RotatingAttack/FrenchFry3/EnemyHitbox"]
+shape = SubResource("CapsuleShape2D_4k6em")
+
+[node name="EnemyHurtbox" parent="RotatingAttack/FrenchFry3" node_paths=PackedStringArray("health_component") instance=ExtResource("4_bw373")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="RotatingAttack/FrenchFry3/EnemyHurtbox"]
+shape = SubResource("CapsuleShape2D_3iben")
+
+[node name="HealthComponent" type="Node2D" parent="RotatingAttack/FrenchFry3"]
+script = ExtResource("10_c5ieu")
+max_health = 1000.0
+
+[node name="Timer" type="Timer" parent="RotatingAttack/FrenchFry3"]
+wait_time = 5.0
+one_shot = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="RotatingAttack/FrenchFry3"]
+process_mode = 3
+modulate = Color(0.992157, 0.847059, 0.207843, 1)
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_nf7af")
+texture = ExtResource("13_mcl18")
+lifetime = 0.3
+
+[node name="Timer2" type="Timer" parent="RotatingAttack/FrenchFry3"]
+wait_time = 4.2
+one_shot = true
+
+[node name="FrenchFry4" type="CharacterBody2D" parent="RotatingAttack" node_paths=PackedStringArray("marker1", "marker2", "marker3", "arrow", "sprite2")]
+position = Vector2(86.6, -50)
+rotation = 1.0472
+collision_layer = 2
+script = ExtResource("8_6wqxa")
+marker1 = NodePath("../Markers/Marker4")
+marker2 = NodePath("../Markers/Marker10")
+marker3 = NodePath("../Markers/Marker16")
+arrow = NodePath("Sprite2D/Arrow")
+sprite2 = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="RotatingAttack/FrenchFry4"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_wb4l0")
+texture = ExtResource("11_86thu")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/bosses/potato/art",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/potatoboss/french_fry_2.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "edd16366e360fe5eb03d11380fb868a8"
+
+[node name="Arrow" type="Sprite2D" parent="RotatingAttack/FrenchFry4/Sprite2D"]
+visible = false
+texture_filter = 1
+position = Vector2(0, -34)
+texture = ExtResource("10_qdfwi")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/bosses/potato/art",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/potatoboss/fry arrow.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "37a4c45a61dc55b33ee3457a5c8e642b"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RotatingAttack/FrenchFry4"]
+shape = SubResource("CapsuleShape2D_yb4q3")
+
+[node name="EnemyHitbox" parent="RotatingAttack/FrenchFry4" instance=ExtResource("3_2o6na")]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="RotatingAttack/FrenchFry4/EnemyHitbox"]
+shape = SubResource("CapsuleShape2D_4k6em")
+
+[node name="EnemyHurtbox" parent="RotatingAttack/FrenchFry4" node_paths=PackedStringArray("health_component") instance=ExtResource("4_bw373")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="RotatingAttack/FrenchFry4/EnemyHurtbox"]
+shape = SubResource("CapsuleShape2D_3iben")
+
+[node name="HealthComponent" type="Node2D" parent="RotatingAttack/FrenchFry4"]
+script = ExtResource("10_c5ieu")
+max_health = 1000.0
+
+[node name="Timer" type="Timer" parent="RotatingAttack/FrenchFry4"]
+wait_time = 5.0
+one_shot = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="RotatingAttack/FrenchFry4"]
+physics_interpolation_mode = 1
+modulate = Color(0.992157, 0.847059, 0.207843, 1)
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_nf7af")
+texture = ExtResource("13_mcl18")
+lifetime = 0.3
+
+[node name="Timer2" type="Timer" parent="RotatingAttack/FrenchFry4"]
+wait_time = 4.2
+one_shot = true
+
+[node name="FrenchFry5" type="CharacterBody2D" parent="RotatingAttack" node_paths=PackedStringArray("marker1", "marker2", "marker3", "arrow", "sprite2")]
+position = Vector2(0, 100)
+rotation = 3.14159
+collision_layer = 2
+script = ExtResource("8_6wqxa")
+marker1 = NodePath("../Markers/Marker5")
+marker2 = NodePath("../Markers/Marker11")
+marker3 = NodePath("../Markers/Marker17")
+arrow = NodePath("Sprite2D/Arrow")
+sprite2 = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="RotatingAttack/FrenchFry5"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_7xfee")
+texture = ExtResource("8_yepxc")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/bosses/potato/art",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/potatoboss/french_fry_1.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "393ba9991674ea345aee73830b969499"
+
+[node name="Arrow" type="Sprite2D" parent="RotatingAttack/FrenchFry5/Sprite2D"]
+visible = false
+texture_filter = 1
+position = Vector2(0, -34)
+texture = ExtResource("10_qdfwi")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/bosses/potato/art",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/potatoboss/fry arrow.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "37a4c45a61dc55b33ee3457a5c8e642b"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RotatingAttack/FrenchFry5"]
+shape = SubResource("CapsuleShape2D_yb4q3")
+
+[node name="EnemyHitbox" parent="RotatingAttack/FrenchFry5" instance=ExtResource("3_2o6na")]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="RotatingAttack/FrenchFry5/EnemyHitbox"]
+shape = SubResource("CapsuleShape2D_4k6em")
+
+[node name="EnemyHurtbox" parent="RotatingAttack/FrenchFry5" node_paths=PackedStringArray("health_component") instance=ExtResource("4_bw373")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="RotatingAttack/FrenchFry5/EnemyHurtbox"]
+shape = SubResource("CapsuleShape2D_3iben")
+
+[node name="HealthComponent" type="Node2D" parent="RotatingAttack/FrenchFry5"]
+script = ExtResource("10_c5ieu")
+max_health = 1000.0
+
+[node name="Timer" type="Timer" parent="RotatingAttack/FrenchFry5"]
+wait_time = 5.0
+one_shot = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="RotatingAttack/FrenchFry5"]
+physics_interpolation_mode = 1
+modulate = Color(0.992157, 0.847059, 0.207843, 1)
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_nf7af")
+texture = ExtResource("13_mcl18")
+lifetime = 0.3
+
+[node name="Timer2" type="Timer" parent="RotatingAttack/FrenchFry5"]
+wait_time = 4.2
+one_shot = true
+
+[node name="FrenchFry6" type="CharacterBody2D" parent="RotatingAttack" node_paths=PackedStringArray("marker1", "marker2", "marker3", "arrow", "sprite2")]
+position = Vector2(-86.6, -50)
+rotation = 5.23599
+collision_layer = 2
+script = ExtResource("8_6wqxa")
+marker1 = NodePath("../Markers/Marker6")
+marker2 = NodePath("../Markers/Marker12")
+marker3 = NodePath("../Markers/Marker18")
+arrow = NodePath("Sprite2D/Arrow")
+sprite2 = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="RotatingAttack/FrenchFry6"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_3khj4")
+texture = ExtResource("8_yepxc")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/bosses/potato/art",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/potatoboss/french_fry_1.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "393ba9991674ea345aee73830b969499"
+
+[node name="Arrow" type="Sprite2D" parent="RotatingAttack/FrenchFry6/Sprite2D"]
+visible = false
+texture_filter = 1
+position = Vector2(3.8147e-06, -34)
+texture = ExtResource("10_qdfwi")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/bosses/potato/art",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/potatoboss/fry arrow.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "37a4c45a61dc55b33ee3457a5c8e642b"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RotatingAttack/FrenchFry6"]
+shape = SubResource("CapsuleShape2D_yb4q3")
+
+[node name="EnemyHitbox" parent="RotatingAttack/FrenchFry6" instance=ExtResource("3_2o6na")]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="RotatingAttack/FrenchFry6/EnemyHitbox"]
+shape = SubResource("CapsuleShape2D_4k6em")
+
+[node name="EnemyHurtbox" parent="RotatingAttack/FrenchFry6" node_paths=PackedStringArray("health_component") instance=ExtResource("4_bw373")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="RotatingAttack/FrenchFry6/EnemyHurtbox"]
+shape = SubResource("CapsuleShape2D_3iben")
+
+[node name="HealthComponent" type="Node2D" parent="RotatingAttack/FrenchFry6"]
+script = ExtResource("10_c5ieu")
+max_health = 1000.0
+
+[node name="Timer" type="Timer" parent="RotatingAttack/FrenchFry6"]
+wait_time = 5.0
+one_shot = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="RotatingAttack/FrenchFry6"]
+physics_interpolation_mode = 1
+modulate = Color(0.992157, 0.847059, 0.207843, 1)
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_nf7af")
+texture = ExtResource("13_mcl18")
+lifetime = 0.3
+
+[node name="Timer2" type="Timer" parent="RotatingAttack/FrenchFry6"]
+wait_time = 4.2
+one_shot = true
+
+[node name="Markers" type="Node2D" parent="RotatingAttack"]
+
+[node name="Marker1" type="Marker2D" parent="RotatingAttack/Markers"]
+position = Vector2(0, -100)
+
+[node name="Marker2" type="Marker2D" parent="RotatingAttack/Markers"]
+position = Vector2(86.8, 50)
+
+[node name="Marker3" type="Marker2D" parent="RotatingAttack/Markers"]
+position = Vector2(-86.6, 50)
+
+[node name="Marker4" type="Marker2D" parent="RotatingAttack/Markers"]
+position = Vector2(86.6, -50)
+
+[node name="Marker5" type="Marker2D" parent="RotatingAttack/Markers"]
+position = Vector2(0, 100)
+
+[node name="Marker6" type="Marker2D" parent="RotatingAttack/Markers"]
+position = Vector2(-86.6, -50)
+
+[node name="Marker7" type="Marker2D" parent="RotatingAttack/Markers"]
+position = Vector2(0, -300)
+
+[node name="Marker8" type="Marker2D" parent="RotatingAttack/Markers"]
+position = Vector2(260, 150)
+
+[node name="Marker9" type="Marker2D" parent="RotatingAttack/Markers"]
+position = Vector2(-260, 150)
+
+[node name="Marker10" type="Marker2D" parent="RotatingAttack/Markers"]
+position = Vector2(260, -150)
+
+[node name="Marker11" type="Marker2D" parent="RotatingAttack/Markers"]
+position = Vector2(0, 300)
+
+[node name="Marker12" type="Marker2D" parent="RotatingAttack/Markers"]
+position = Vector2(-260, -150)
+
+[node name="Marker13" type="Marker2D" parent="RotatingAttack/Markers"]
+position = Vector2(0, -200)
+
+[node name="Marker14" type="Marker2D" parent="RotatingAttack/Markers"]
+position = Vector2(173, 100)
+
+[node name="Marker15" type="Marker2D" parent="RotatingAttack/Markers"]
+position = Vector2(-173, 100)
+
+[node name="Marker16" type="Marker2D" parent="RotatingAttack/Markers"]
+position = Vector2(173, -100)
+
+[node name="Marker17" type="Marker2D" parent="RotatingAttack/Markers"]
+position = Vector2(0, 200)
+
+[node name="Marker18" type="Marker2D" parent="RotatingAttack/Markers"]
+position = Vector2(-173, -100)
+
+[node name="TaterTots" type="Node2D" parent="."]
+script = ExtResource("15_53lw8")
+
+[node name="Timer" type="Timer" parent="TaterTots"]
+wait_time = 9.0
+
+[node name="MiniPotatos" type="Node2D" parent="."]
+
+[node name="MiniPotato" parent="MiniPotatos" instance=ExtResource("16_psyml")]
+position = Vector2(-180, 0)
+
+[node name="MiniPotato2" parent="MiniPotatos" instance=ExtResource("16_psyml")]
+position = Vector2(180, 0)
+
+[connection signal="area_entered" from="Potato/EnemyHitbox" to="Potato/EnemyHitbox" method="_on_area_entered"]
+[connection signal="timeout" from="RotatingAttack/Timers/AttackTimer" to="RotatingAttack" method="_on_attack_timer_timeout"]
+[connection signal="area_entered" from="RotatingAttack/FrenchFry/EnemyHitbox" to="RotatingAttack/FrenchFry/EnemyHitbox" method="_on_area_entered"]
+[connection signal="died" from="RotatingAttack/FrenchFry/HealthComponent" to="RotatingAttack/FrenchFry" method="_on_health_component_died"]
+[connection signal="timeout" from="RotatingAttack/FrenchFry/Timer" to="RotatingAttack/FrenchFry" method="_on_timer_timeout"]
+[connection signal="timeout" from="RotatingAttack/FrenchFry/Timer2" to="RotatingAttack/FrenchFry" method="_on_timer_2_timeout"]
+[connection signal="area_entered" from="RotatingAttack/FrenchFry2/EnemyHitbox" to="RotatingAttack/FrenchFry2/EnemyHitbox" method="_on_area_entered"]
+[connection signal="died" from="RotatingAttack/FrenchFry2/HealthComponent" to="RotatingAttack/FrenchFry2" method="_on_health_component_died"]
+[connection signal="timeout" from="RotatingAttack/FrenchFry2/Timer" to="RotatingAttack/FrenchFry2" method="_on_timer_timeout"]
+[connection signal="timeout" from="RotatingAttack/FrenchFry2/Timer2" to="RotatingAttack/FrenchFry2" method="_on_timer_2_timeout"]
+[connection signal="area_entered" from="RotatingAttack/FrenchFry3/EnemyHitbox" to="RotatingAttack/FrenchFry3/EnemyHitbox" method="_on_area_entered"]
+[connection signal="died" from="RotatingAttack/FrenchFry3/HealthComponent" to="RotatingAttack/FrenchFry3" method="_on_health_component_died"]
+[connection signal="timeout" from="RotatingAttack/FrenchFry3/Timer" to="RotatingAttack/FrenchFry3" method="_on_timer_timeout"]
+[connection signal="timeout" from="RotatingAttack/FrenchFry3/Timer2" to="RotatingAttack/FrenchFry3" method="_on_timer_2_timeout"]
+[connection signal="area_entered" from="RotatingAttack/FrenchFry4/EnemyHitbox" to="RotatingAttack/FrenchFry4/EnemyHitbox" method="_on_area_entered"]
+[connection signal="died" from="RotatingAttack/FrenchFry4/HealthComponent" to="RotatingAttack/FrenchFry4" method="_on_health_component_died"]
+[connection signal="timeout" from="RotatingAttack/FrenchFry4/Timer" to="RotatingAttack/FrenchFry4" method="_on_timer_timeout"]
+[connection signal="timeout" from="RotatingAttack/FrenchFry4/Timer2" to="RotatingAttack/FrenchFry4" method="_on_timer_2_timeout"]
+[connection signal="area_entered" from="RotatingAttack/FrenchFry5/EnemyHitbox" to="RotatingAttack/FrenchFry5/EnemyHitbox" method="_on_area_entered"]
+[connection signal="died" from="RotatingAttack/FrenchFry5/HealthComponent" to="RotatingAttack/FrenchFry5" method="_on_health_component_died"]
+[connection signal="timeout" from="RotatingAttack/FrenchFry5/Timer" to="RotatingAttack/FrenchFry5" method="_on_timer_timeout"]
+[connection signal="timeout" from="RotatingAttack/FrenchFry5/Timer2" to="RotatingAttack/FrenchFry5" method="_on_timer_2_timeout"]
+[connection signal="area_entered" from="RotatingAttack/FrenchFry6/EnemyHitbox" to="RotatingAttack/FrenchFry6/EnemyHitbox" method="_on_area_entered"]
+[connection signal="died" from="RotatingAttack/FrenchFry6/HealthComponent" to="RotatingAttack/FrenchFry6" method="_on_health_component_died"]
+[connection signal="timeout" from="RotatingAttack/FrenchFry6/Timer" to="RotatingAttack/FrenchFry6" method="_on_timer_timeout"]
+[connection signal="timeout" from="RotatingAttack/FrenchFry6/Timer2" to="RotatingAttack/FrenchFry6" method="_on_timer_2_timeout"]
+[connection signal="timeout" from="TaterTots/Timer" to="TaterTots" method="_on_timer_timeout"]

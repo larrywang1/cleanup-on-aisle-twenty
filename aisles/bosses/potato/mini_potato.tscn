@@ -1,0 +1,86 @@
+[gd_scene load_steps=9 format=3 uid="uid://ddxfi4bbtan2e"]
+
+[ext_resource type="Texture2D" uid="uid://0yl1vcar5g80" path="res://aisles/bosses/potato/art/minipotato.png" id="1_76ki5"]
+[ext_resource type="Script" path="res://aisles/bosses/potato/mini_potato.gd" id="1_be70k"]
+[ext_resource type="Script" path="res://aisles/bosses/potato/french_fry_health_component.gd" id="3_dvkif"]
+[ext_resource type="PackedScene" uid="uid://bvr04i1rtrr5n" path="res://components/scenes/enemy_hurtbox.tscn" id="4_n52ik"]
+[ext_resource type="Texture2D" uid="uid://b7hlso63molfo" path="res://aisles/bosses/potato/art/fryparticle.png" id="5_n3voe"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hmcdq"]
+radius = 15.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_adqtl"]
+radius = 18.0278
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mpbpj"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 102.15
+initial_velocity_max = 102.15
+angular_velocity_min = -85.16
+angular_velocity_max = -85.16
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 0.0430001
+
+[node name="MiniPotato" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_be70k")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_76ki5")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/bosses/potato/art",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/potatoboss/minipotato.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "99dc091fe6f69356fee486a0dbb66fb9"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hmcdq")
+
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("3_dvkif")
+max_health = 1000.0
+damage_dealt = 5000.0
+
+[node name="EnemyHurtbox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_n52ik")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHurtbox"]
+shape = SubResource("CircleShape2D_adqtl")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+modulate = Color(0.992157, 0.666667, 0.207843, 1)
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_mpbpj")
+texture = ExtResource("5_n3voe")
+lifetime = 0.3
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 4.2
+one_shot = true
+
+[node name="Timer3" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
+[connection signal="timeout" from="Timer3" to="." method="_on_timer_3_timeout"]

@@ -1,0 +1,154 @@
+[gd_scene load_steps=18 format=3 uid="uid://c8an6srm3uwaw"]
+
+[ext_resource type="Script" path="res://aisles/bosses/banana/banana_launcher_projectile.gd" id="1_unytl"]
+[ext_resource type="Texture2D" uid="uid://m4mbpf538fo4" path="res://aisles/bosses/banana/art/bananalauncherindicator.png" id="2_g0baa"]
+[ext_resource type="Texture2D" uid="uid://llwdp7h1yhik" path="res://aisles/bosses/banana/art/largebananaprojectilereal.png" id="3_n52k1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ues1h"]
+radius = 81.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_14r1c"]
+atlas = ExtResource("3_n52k1")
+region = Rect2(0, 0, 150, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxk4d"]
+atlas = ExtResource("3_n52k1")
+region = Rect2(150, 0, 150, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhl1c"]
+atlas = ExtResource("3_n52k1")
+region = Rect2(300, 0, 150, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_py24j"]
+atlas = ExtResource("3_n52k1")
+region = Rect2(450, 0, 150, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1fvhd"]
+atlas = ExtResource("3_n52k1")
+region = Rect2(0, 144, 150, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pls6c"]
+atlas = ExtResource("3_n52k1")
+region = Rect2(150, 144, 150, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqat7"]
+atlas = ExtResource("3_n52k1")
+region = Rect2(300, 144, 150, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lg6um"]
+atlas = ExtResource("3_n52k1")
+region = Rect2(450, 144, 150, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ccxb6"]
+atlas = ExtResource("3_n52k1")
+region = Rect2(0, 288, 150, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_baopv"]
+atlas = ExtResource("3_n52k1")
+region = Rect2(150, 288, 150, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7bmk"]
+atlas = ExtResource("3_n52k1")
+region = Rect2(300, 288, 150, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_un8a4"]
+atlas = ExtResource("3_n52k1")
+region = Rect2(450, 288, 150, 144)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_55pyt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_14r1c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fxk4d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhl1c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_py24j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1fvhd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pls6c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xqat7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lg6um")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ccxb6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_baopv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i7bmk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_un8a4")
+}],
+"loop": false,
+"name": &"default",
+"speed": 20.0
+}]
+
+[node name="BananaLauncher" type="Area2D"]
+collision_layer = 16
+collision_mask = 8
+script = ExtResource("1_unytl")
+
+[node name="Indicator" type="Sprite2D" parent="."]
+z_index = -1
+texture_filter = 1
+texture = ExtResource("2_g0baa")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/bosses/banana/art",
+"o_name": "bananalauncherindicator",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/bananaboss/launcherattackzone.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "6706a145eadb3ee75fe5c0665c08a088"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ues1h")
+
+[node name="Projectile" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -500)
+sprite_frames = SubResource("SpriteFrames_55pyt")
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/bosses/banana/art",
+"o_name": "",
+"only_visible": false,
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/bananaboss/largebananaprojectilereal.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "22bab61acb649137baca7e9a49fededf"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

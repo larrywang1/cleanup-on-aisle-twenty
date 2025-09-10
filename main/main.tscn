@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://main/bullet_boundaries.gd" id="1_1ro57"]
 [ext_resource type="Script" path="res://main/main.gd" id="1_ag7hn"]
 [ext_resource type="Script" path="res://main/aisle_manager.gd" id="1_nr0xc"]
-[ext_resource type="PackedScene" uid="uid://kfmkg11m0106" path="res://player/player.tscn" id="1_slmoa"]
+[ext_resource type="PackedScene" uid="uid://bpouslv6djk0w" path="res://player/player.tscn" id="1_slmoa"]
 [ext_resource type="Script" path="res://main/camera.gd" id="2_ds32f"]
 [ext_resource type="Script" path="res://main/shop_manager.gd" id="4_25pmv"]
 [ext_resource type="PackedScene" uid="uid://buqdqws6s83sr" path="res://ui/ui.tscn" id="9_oh6iv"]
@@ -29,12 +29,14 @@ script = ExtResource("1_ag7hn")
 [node name="UI" parent="." instance=ExtResource("9_oh6iv")]
 
 [node name="AisleManager" type="Node2D" parent="." node_paths=PackedStringArray("environment", "entities")]
+visible = false
 script = ExtResource("1_nr0xc")
 environment = NodePath("../Environment")
 entities = NodePath("../Entities")
 
 [node name="ShopManager" type="Node2D" parent="."]
 process_mode = 3
+visible = false
 script = ExtResource("4_25pmv")
 
 [node name="Environment" type="Node2D" parent="."]
@@ -82,15 +84,15 @@ shape = SubResource("WorldBoundaryShape2D_i24pk")
 [node name="Entities" type="Node2D" parent="."]
 
 [node name="Player" parent="Entities" instance=ExtResource("1_slmoa")]
-position = Vector2(0, 194)
+position = Vector2(0, 174)
 
 [node name="Projectiles" type="Node2D" parent="." groups=["projectiles"]]
 
 [node name="Camera" type="Camera2D" parent="."]
 limit_left = -450
-limit_top = -275
+limit_top = -300
 limit_right = 450
-limit_bottom = 275
+limit_bottom = 300
 script = ExtResource("2_ds32f")
 
 [node name="Timer" type="Timer" parent="Camera"]

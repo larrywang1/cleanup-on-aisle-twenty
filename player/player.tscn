@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://kfmkg11m0106"]
+[gd_scene load_steps=13 format=3 uid="uid://bpouslv6djk0w"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_uyf5b"]
 [ext_resource type="Script" path="res://player/player_components/items_manager.gd" id="2_5ptxu"]
@@ -7,27 +7,30 @@
 [ext_resource type="Script" path="res://player/player_components/player_health_component.gd" id="4_fr0x2"]
 [ext_resource type="Script" path="res://player/player_components/player_hurtbox_component.gd" id="5_1crtt"]
 [ext_resource type="Script" path="res://player/player_components/attack_component.gd" id="6_q0urc"]
-[ext_resource type="PackedScene" uid="uid://dvngsr46b5yoy" path="res://modifications/normal_attack/bananarang/bananarang_normal_attack.tscn" id="7_2rhk3"]
 [ext_resource type="Texture2D" uid="uid://bpixhki3x6eni" path="res://player/art/shopping_cart.png" id="7_urw47"]
 [ext_resource type="PackedScene" uid="uid://bss6awl7nk7bb" path="res://modifications/charged_attack/basic/basic_charged_attack.tscn" id="8_pg0td"]
+[ext_resource type="PackedScene" uid="uid://i38332fsfqdx" path="res://modifications/normal_attack/basic/basic_normal_attack.tscn" id="8_wxgcy"]
 [ext_resource type="Shader" path="res://miscellaneous/enemy_flash.gdshader" id="9_amn32"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i5yl4"]
 shader = ExtResource("9_amn32")
 shader_parameter/flash_amount = 0.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("dash_component", "stamina_component", "health_component", "hurtbox_component") groups=["player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("dash_component", "stamina_component", "health_component", "hurtbox_component", "attack_component") groups=["player"]]
 z_index = -1
 collision_mask = 130
 motion_mode = 1
 script = ExtResource("1_uyf5b")
 damage = 100.0
+original_max_speed = 150
+max_speed = 150
 acceleration = 1000
 friction = 1000
 dash_component = NodePath("DashComponent")
 stamina_component = NodePath("StaminaComponent")
 health_component = NodePath("PlayerHealthComponent")
 hurtbox_component = NodePath("PlayerHurtboxComponent")
+attack_component = NodePath("AttackComponent")
 
 [node name="ItemsManager" type="Node2D" parent="." groups=["item_manager"]]
 script = ExtResource("2_5ptxu")
@@ -57,7 +60,7 @@ one_shot = true
 script = ExtResource("3_uk7yy")
 max_stamina = 4
 stamina_timer = NodePath("StaminaRegeneration")
-initial_stamina_cooldown = 2.0
+initial_stamina_cooldown = 2.5
 stamina_cooldown = 0.5
 
 [node name="StaminaRegeneration" type="Timer" parent="StaminaComponent"]
@@ -65,7 +68,7 @@ wait_time = 0.5
 
 [node name="PlayerHealthComponent" type="Node2D" parent="." node_paths=PackedStringArray("invin_timer", "hurtbox", "blink_timer", "sprite") groups=["player_health"]]
 script = ExtResource("4_fr0x2")
-max_health = 4
+max_health = 15
 invin_timer = NodePath("InvinTimer")
 hurtbox = NodePath("../PlayerHurtboxComponent")
 blink_timer = NodePath("BlinkTimer")
@@ -90,6 +93,7 @@ health_component = NodePath("../PlayerHealthComponent")
 polygon = PackedVector2Array(-13, 20, -7, -16, 7, -16, 13, 20)
 
 [node name="AttackComponent" type="Node2D" parent="." node_paths=PackedStringArray("normal_attack", "charged_attack", "cooldown_timer") groups=["attack_component"]]
+visible = false
 script = ExtResource("6_q0urc")
 normal_attack = NodePath("NormalAttack")
 charged_attack = NodePath("ChargedAttack")
@@ -97,7 +101,7 @@ cooldown_timer = NodePath("AttackCooldown")
 
 [node name="NormalAttack" type="Node2D" parent="AttackComponent"]
 
-[node name="BananarangNormalAttack" parent="AttackComponent/NormalAttack" instance=ExtResource("7_2rhk3")]
+[node name="BasicNormalAttack" parent="AttackComponent/NormalAttack" instance=ExtResource("8_wxgcy")]
 
 [node name="ChargedAttack" type="Node2D" parent="AttackComponent"]
 

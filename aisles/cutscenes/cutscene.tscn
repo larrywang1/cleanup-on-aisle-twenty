@@ -1,11 +1,131 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlars6a5n7i55"]
+[gd_scene load_steps=9 format=3 uid="uid://dlars6a5n7i55"]
 
-[ext_resource type="Texture2D" uid="uid://ceci1fe8xxv4c" path="res://aisles/cutscenes/art/grapecutscene.png" id="1_qp5tt"]
 [ext_resource type="Script" path="res://aisles/cutscenes/cutscene.gd" id="1_temtu"]
+[ext_resource type="Texture2D" uid="uid://1lt5gpdw1gy" path="res://aisles/cutscenes/art/cutscene.png" id="2_vc0ef"]
+
+[sub_resource type="Animation" id="Animation_30gol"]
+length = 2.79
+loop_mode = 1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(2.79),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"finished"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.72, 0.8, 0.88, 0.96, 1.04, 1.19, 1.34, 1.54, 1.74, 1.94, 2.14, 2.34, 2.49, 2.64),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42]
+}
+
+[sub_resource type="Animation" id="Animation_hdu62"]
+length = 1.775
+loop_mode = 1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.76667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"finished"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7, 0.75, 0.8, 0.85, 0.885, 0.92, 0.955, 0.99, 1.025, 1.075, 1.325, 1.415, 1.505, 1.595, 1.685),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76]
+}
 
 [sub_resource type="Animation" id="Animation_48wvo"]
 resource_name = "grape"
 length = 2.07
+loop_mode = 1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(2.06667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"finished"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.43, 0.51, 0.635, 0.76, 0.885, 1.01, 1.135, 1.26, 1.385, 1.51, 1.59, 1.67, 1.75, 1.83, 1.91, 1.99),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+}
+
+[sub_resource type="Animation" id="Animation_qcqko"]
+length = 1.89
+loop_mode = 1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.86667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"finished"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 0.83, 0.91, 0.97, 1.03, 1.09, 1.15, 1.21, 1.27, 1.33, 1.39, 1.45, 1.51, 1.57, 1.63, 1.69),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 52, 53, 54, 55, 56, 57, 58, 59, 60]
+}
+
+[sub_resource type="Animation" id="Animation_6o1ku"]
+length = 1.2
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -14,29 +134,19 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.43, 0.51, 0.635, 0.76, 0.885, 1.01, 1.135, 1.26, 1.385, 1.51, 1.59, 1.67, 1.75, 1.83, 1.91, 1.99),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.06, 0.12, 0.18, 0.28, 0.38, 0.44, 0.5, 0.6, 0.7, 0.76, 0.82, 0.88, 0.94, 1.04, 1.14),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(2.06667),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"finished"
-}]
+"values": [77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 91]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hbyxr"]
 _data = {
-"grape": SubResource("Animation_48wvo")
+"banana": SubResource("Animation_30gol"),
+"carrot": SubResource("Animation_hdu62"),
+"grape": SubResource("Animation_48wvo"),
+"potato": SubResource("Animation_6o1ku"),
+"watermelon": SubResource("Animation_qcqko")
 }
 
 [node name="Cutscene" type="CanvasLayer"]
@@ -49,16 +159,17 @@ process_mode = 3
 texture_filter = 1
 position = Vector2(320, 180)
 scale = Vector2(2, 2)
-texture = ExtResource("1_qp5tt")
-hframes = 5
-vframes = 5
+texture = ExtResource("2_vc0ef")
+hframes = 10
+vframes = 10
+frame = 24
 metadata/_aseprite_wizard_config_ = {
 "i_mode": -1,
 "keep_anim_length": false,
 "layer": "",
 "o_ex_p": "",
 "o_folder": "res://aisles/cutscenes/art",
-"o_name": "grapecutscene",
+"o_name": "cutscene",
 "only_visible": false,
 "player": "AnimationPlayer",
 "slice": "",
@@ -68,7 +179,7 @@ metadata/_aseprite_wizard_interface_config_ = {
 "animation_section": false,
 "output_section": true
 }
-metadata/_aseprite_wizard_source_file_hash_ = "e40552b54e838bbf7671adbafd2e1a14"
+metadata/_aseprite_wizard_source_file_hash_ = "124aedbbef17ef5e80209ba489180c0d"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

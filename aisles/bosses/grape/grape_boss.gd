@@ -49,7 +49,7 @@ func damaged(_damage) -> void:
 	if not is_tweening:
 		is_tweening = true
 		var tween = create_tween()
-		sprite.material.set_shader_parameter("flash_amount", 1.0)
+		sprite.material.set_shader_parameter("flash_amount", 0.95)
 		tween.tween_property(sprite.material, "shader_parameter/flash_amount", 0.7, 0.15)
 		await tween.finished
 		sprite.material.set_shader_parameter("flash_amount", 0.0)

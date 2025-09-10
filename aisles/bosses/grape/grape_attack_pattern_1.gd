@@ -1,6 +1,6 @@
 extends Node
 
-@onready var player : CharacterBody2D = get_tree().get_first_node_in_group("player")
+@onready var player : CharacterBody2D = RunManager.player
 @onready var grape : CharacterBody2D = $".."
 @onready var full2 : Timer = $Full2
 @onready var full3 : Timer = $Full3

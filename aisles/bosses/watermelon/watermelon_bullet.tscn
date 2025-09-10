@@ -1,0 +1,85 @@
+[gd_scene load_steps=8 format=3 uid="uid://b5dvmr6x2twh5"]
+
+[ext_resource type="Script" path="res://aisles/bosses/watermelon/watermelon_bullet.gd" id="1_ate3r"]
+[ext_resource type="Texture2D" uid="uid://0jtfkuv664a6" path="res://aisles/bosses/watermelon/art/watermelon_big_attack.png" id="1_w2lr7"]
+[ext_resource type="Script" path="res://addons/BulletUpHell/Nodes/BuHSpawnPoint.gd" id="2_0035k"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3ruuy"]
+radius = 24.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kkekd"]
+atlas = ExtResource("1_w2lr7")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k2kfn"]
+atlas = ExtResource("1_w2lr7")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6bvmn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kkekd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k2kfn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="WatermelonBullet" type="Area2D" node_paths=PackedStringArray("spawnpoint", "timer", "sprite")]
+collision_layer = 16
+collision_mask = 8
+script = ExtResource("1_ate3r")
+speed = 200.0
+rotation_speed = 10.0
+spawnpoint = NodePath("SpawnPoint")
+timer = NodePath("LifeTime")
+sprite = NodePath("AnimatedSprite2D")
+
+[node name="LifeTime" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3ruuy")
+
+[node name="SpawnPoint" type="Node2D" parent="."]
+script = ExtResource("2_0035k")
+active = false
+auto_pattern_id = "watermelon_attack_1"
+r_active_chances = 1.0
+r_rotating_variation = Vector3(0, 0, 0)
+r_pattern_choice = ""
+r_start_time_choice = ""
+r_start_time_variation = Vector3(0, 0, 0)
+r_start_distance_choice = ""
+r_start_distance_variation = Vector3(0, 0, 0)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_6bvmn")
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/bosses/watermelon/art",
+"o_name": "",
+"only_visible": false,
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/watermelonboss/watermelon_big_attack.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"layer_section": false,
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "c124fd7af2d5af57e50ee00fbfe73aff"
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="LifeTime" to="." method="_on_life_time_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

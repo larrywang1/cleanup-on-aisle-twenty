@@ -1,0 +1,235 @@
+[gd_scene load_steps=30 format=3 uid="uid://cxydgjj5vfwuf"]
+
+[ext_resource type="Texture2D" uid="uid://iuu81xxj8q3n" path="res://aisles/bosses/potato/art/potatopellet.png" id="1_a7wde"]
+[ext_resource type="Script" path="res://aisles/bosses/potato/potato_pellet.gd" id="1_csqse"]
+[ext_resource type="Texture2D" uid="uid://bssbj2gpyckcj" path="res://aisles/bosses/potato/art/tatertotexplosion.png" id="3_r0srk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ooo3u"]
+atlas = ExtResource("1_a7wde")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ytfrj"]
+atlas = ExtResource("1_a7wde")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aj4c2"]
+atlas = ExtResource("1_a7wde")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ve2k2"]
+atlas = ExtResource("1_a7wde")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2w15l"]
+atlas = ExtResource("1_a7wde")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6vb75"]
+atlas = ExtResource("1_a7wde")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tip1i"]
+atlas = ExtResource("1_a7wde")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qj5ci"]
+atlas = ExtResource("1_a7wde")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jl5d8"]
+atlas = ExtResource("1_a7wde")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6icjw"]
+atlas = ExtResource("1_a7wde")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m4uqx"]
+animations = [{
+"frames": [{
+"duration": 1.33333,
+"texture": SubResource("AtlasTexture_ooo3u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ytfrj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aj4c2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ve2k2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2w15l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6vb75")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tip1i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qj5ci")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jl5d8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6icjw")
+}],
+"loop": false,
+"name": &"default",
+"speed": 14.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3yit1"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vufdk"]
+radius = 30.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8kdqi"]
+atlas = ExtResource("3_r0srk")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_swduh"]
+atlas = ExtResource("3_r0srk")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6rsh4"]
+atlas = ExtResource("3_r0srk")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3v2db"]
+atlas = ExtResource("3_r0srk")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0dxpi"]
+atlas = ExtResource("3_r0srk")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ib1p"]
+atlas = ExtResource("3_r0srk")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxp31"]
+atlas = ExtResource("3_r0srk")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gsshv"]
+atlas = ExtResource("3_r0srk")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gj4ej"]
+atlas = ExtResource("3_r0srk")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j1e6p"]
+atlas = ExtResource("3_r0srk")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_56bdm"]
+atlas = ExtResource("3_r0srk")
+region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dkwam"]
+atlas = ExtResource("3_r0srk")
+region = Rect2(192, 128, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1ifct"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8kdqi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_swduh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6rsh4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3v2db")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0dxpi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ib1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fxp31")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gsshv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gj4ej")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j1e6p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_56bdm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dkwam")
+}],
+"loop": false,
+"name": &"default",
+"speed": 19.0
+}]
+
+[node name="PotatoPellet" type="CharacterBody2D"]
+collision_layer = 0
+script = ExtResource("1_csqse")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_m4uqx")
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/bosses/potato/art",
+"o_name": "",
+"only_visible": false,
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/potatoboss/potatopellet.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "7e011503b6b649bb4c9af238ff079674"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3yit1")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_vufdk")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="Explosion" type="AnimatedSprite2D" parent="."]
+visible = false
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_1ifct")
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://aisles/bosses/potato/art",
+"o_name": "",
+"only_visible": false,
+"slice": "",
+"source": "C:/Users/edibl/BentoWorks/CleanupOnAisleTwenty/aseprite assets/potatoboss/tatertotexplosion.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "3912f25fa86a29295794614006bb92f0"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 var can_move : bool = true
 var can_aim : bool = true
@@ -21,7 +22,11 @@ var damage_amplification : float = 1.0
 @export var stamina_component : Node2D
 @export var health_component : Node2D
 @export var hurtbox_component : Node2D
+@export var attack_component : Node2D
 @export_group("")
+
+func _ready() -> void:
+	RunManager.player = self
 
 func _physics_process(delta: float) -> void:
 	if can_move:
@@ -33,6 +38,8 @@ func _physics_process(delta: float) -> void:
 		rotation = aiming_direction.angle() - Vector2(0, -1).angle()
 	if Input.is_action_just_pressed("dash") and can_dash:
 		dash_component.dash(aiming_direction, velocity, movement_direction)
+	if Input.is_action_just_pressed("reset"):
+		EventBus.player_died.emit()
 
 func get_movement_input() -> void:
 	movement_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
